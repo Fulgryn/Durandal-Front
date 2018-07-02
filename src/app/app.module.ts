@@ -9,12 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
+import {CalendarModule} from 'primeng/calendar';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 // Components
 import { AppComponent } from './app.component';
 import { FormConnexionComponent } from './form-connexion/form-connexion.component';
 import { HomeComponent } from './home/home.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
@@ -30,6 +33,8 @@ const appRoutes: Routes = [
     InscriptionComponent
   ],
   imports: [
+    CalendarModule,
+    InputTextareaModule,
     ReactiveFormsModule,
     FormsModule,
     InputTextModule,

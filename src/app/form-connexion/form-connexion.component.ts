@@ -18,12 +18,14 @@ export class FormConnexionComponent implements OnInit {
   model: User ;
   pass: string| Int32Array;
 
+  login: boolean;
   formulaire: FormGroup;
   constructor(private fb: FormBuilder) {
 
+    this.login = true; // style: display true html
     this.formulaire = fb.group({
-      email: ['',  Validators.compose([Validators.minLength(5), Validators.required])],
-      password : ['', Validators.pattern('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]
+      logEmail: ['',  Validators.compose([Validators.minLength(5), Validators.required])],
+      logPassword : ['', Validators.pattern('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]
     });
   }
 
@@ -32,7 +34,9 @@ export class FormConnexionComponent implements OnInit {
 
   onSubmit() {
     // this.userService.connect(this.model).subscribe();
-    this.pass = Md5.hashAsciiStr(this.formulaire.get('password').value);
+    this.pass = Md5.hashAsciiStr(this.formulaire.get('logPassword').value);
     alert('mdp: ' + this.pass);
   }
+
+
 }

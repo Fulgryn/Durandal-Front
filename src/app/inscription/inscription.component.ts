@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Md5 } from 'ts-md5';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CalendarModule} from 'primeng/calendar';
+
 
 @Component({
   selector: 'app-inscription',
@@ -15,7 +18,13 @@ export class InscriptionComponent implements OnInit {
 
     this.formulaire = fb.group({
       email: ['',  Validators.compose([Validators.minLength(5), Validators.required])],
-      password : ['', Validators.pattern('')]
+      password : ['', Validators.pattern('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')],
+      nom : ['', Validators.required],
+      prenom : ['', Validators.required],
+      adresse : ['' ],
+      tel: ['', Validators.minLength(10)],
+      naissance: [''],
+
     });
   }
 
@@ -25,6 +34,6 @@ export class InscriptionComponent implements OnInit {
   onSubmit() {
     // this.userService.connect(this.model).subscribe();
     this.pass = Md5.hashAsciiStr(this.formulaire.get('password').value);
-    alert('mdp: ' + this.pass);
+    alert('mdp: ' + this.formulaire.get('naissance').value);
   }
 }

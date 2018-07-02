@@ -1,5 +1,9 @@
+import { v4 as uuid } from 'uuid';
+
+
 export class User {
 
+    id: number;
     email: string;
     passHash: String | Int32Array;
     nom ;
