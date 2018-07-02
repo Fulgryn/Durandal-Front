@@ -11,13 +11,17 @@ import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import { DataViewModule } from 'primeng/dataview';
+import {TableModule} from 'primeng/table';
 
 // Components
 import { AppComponent } from './app.component';
 import { FormConnexionComponent } from './form-connexion/form-connexion.component';
 import { HomeComponent } from './home/home.component';
 import { InscriptionComponent } from './inscription/inscription.component';
-
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductService } from './product.service';
+import { OrderAdminComponent } from './order-admin/order-admin.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
@@ -30,7 +34,9 @@ const appRoutes: Routes = [
     AppComponent,
     FormConnexionComponent,
     HomeComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ProductDetailsComponent,
+OrderAdminComponent
   ],
   imports: [
     CalendarModule,
@@ -42,10 +48,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MenubarModule,
-    MenuModule
+    MenuModule,
+    DataViewModule,
+	TableModule
 
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
