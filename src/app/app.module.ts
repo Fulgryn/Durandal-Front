@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
+import { DataViewModule } from 'primeng/dataview';
 import {TableModule} from 'primeng/table';
 
 // Components
@@ -16,13 +17,14 @@ import { AppComponent } from './app.component';
 import { FormConnexionComponent } from './form-connexion/form-connexion.component';
 import { HomeComponent } from './home/home.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductService } from './product.service';
 import { OrderAdminComponent } from './order-admin/order-admin.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
   { path: 'Inscription', component: InscriptionComponent },
-  { path: 'Admin/Order', component: OrderAdminComponent }
 ];
 
 @NgModule({
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     FormConnexionComponent,
     HomeComponent,
     InscriptionComponent,
-    OrderAdminComponent
+    ProductDetailsComponent,
+OrderAdminComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -42,10 +45,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MenubarModule,
     MenuModule,
-    TableModule
+    DataViewModule,
+	TableModule
 
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
