@@ -9,12 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
+import { DataViewModule } from 'primeng/dataview';
 
 // Components
 import { AppComponent } from './app.component';
 import { FormConnexionComponent } from './form-connexion/form-connexion.component';
 import { HomeComponent } from './home/home.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductService } from './product.service';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     AppComponent,
     FormConnexionComponent,
     HomeComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ProductDetailsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -36,10 +40,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MenubarModule,
-    MenuModule
+    MenuModule,
+    DataViewModule
 
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
