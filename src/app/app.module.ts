@@ -22,6 +22,7 @@ import { ProductService } from './product.service';
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
+  { path: 'Inscription', component: InscriptionComponent },
 ];
 
 @NgModule({

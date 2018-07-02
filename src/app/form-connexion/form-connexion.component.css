@@ -1,5 +1,15 @@
 
+button{
+    display: flex; 
+    margin-left: auto;
+}
 
-.form-group {
-    margin: 5px;
+.btn-group{
+    display: flex;
+    margin: auto;
+}
+
+.btn:focus {
+    background-color: #8064A2;
+    border-color: #8064A2;
 }
