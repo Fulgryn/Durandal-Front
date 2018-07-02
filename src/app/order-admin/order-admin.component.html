@@ -1,0 +1,16 @@
+<h2>Liste des commandes</h2>
+<hr>
+<input #query (keyup)="search(query.value)" type="text" class="form-control" placeholder="search...">
+<hr>
+<p-table>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID Client</th>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th>Date de commande</th>
+            <th>Liste des produits commandés</th>
+        </tr>
+    </ng-template>
+</p-table>
+
