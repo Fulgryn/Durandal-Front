@@ -1,23 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {InputTextModule} from 'primeng/inputtext';
-import {PasswordModule} from 'primeng/password';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Md5} from 'ts-md5/dist/md5';
-
-
-
-import {User} from '../user';
+import { Md5 } from 'ts-md5';
 
 @Component({
-  selector: 'app-form-connexion',
-  templateUrl: './form-connexion.component.html',
-  styleUrls: ['./form-connexion.component.css']
+  selector: 'app-inscription',
+  templateUrl: './inscription.component.html',
+  styleUrls: ['./inscription.component.css']
 })
-export class FormConnexionComponent implements OnInit {
-  model: User ;
+export class InscriptionComponent implements OnInit {
   pass: string| Int32Array;
-
   formulaire: FormGroup;
+
   constructor(private fb: FormBuilder) {
 
     this.formulaire = fb.group({

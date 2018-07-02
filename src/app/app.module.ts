@@ -5,26 +5,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
-//PrimeNG items
+// PrimeNG items
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
 
-//Components
+// Components
 import { AppComponent } from './app.component';
 import { FormConnexionComponent } from './form-connexion/form-connexion.component';
 import { HomeComponent } from './home/home.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
-]
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     FormConnexionComponent,
-    HomeComponent
+    HomeComponent,
+    InscriptionComponent
   ],
   imports: [
     ReactiveFormsModule,
