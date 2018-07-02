@@ -1,8 +1,13 @@
 export class User {
 
     email: string;
-    password_clair: String;
     passHash: String | Int32Array;
+    nom ;
+    prenom;
+    adresse;
+    telephone;
+    dateDeNaissance;
+
 
     constructor() {
         this.email = null;

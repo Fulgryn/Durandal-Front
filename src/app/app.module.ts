@@ -19,6 +19,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
+  { path: 'Inscription', component: InscriptionComponent },
 ];
 
 @NgModule({

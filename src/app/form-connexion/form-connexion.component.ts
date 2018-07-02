@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {InputTextModule} from 'primeng/inputtext';
+import {InputTextModule} from 'primeng/components/inputtext/inputtext';
+
 import {PasswordModule} from 'primeng/password';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Md5} from 'ts-md5/dist/md5';
@@ -22,7 +23,7 @@ export class FormConnexionComponent implements OnInit {
 
     this.formulaire = fb.group({
       email: ['',  Validators.compose([Validators.minLength(5), Validators.required])],
-      password : ['', Validators.pattern('')]
+      password : ['', Validators.pattern('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]
     });
   }
 
