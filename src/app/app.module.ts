@@ -26,11 +26,13 @@ import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
   { path: 'Inscription', component: InscriptionComponent },
+  { path: 'AddProduct', component: CreateProductComponent }
 ];
 
 @NgModule({
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     InscriptionComponent,
     ProductDetailsComponent,
     OrderAdminComponent,
-    ProductsComponent
+    ProductsComponent,
+    CreateProductComponent
   ],
   imports: [
     CalendarModule,

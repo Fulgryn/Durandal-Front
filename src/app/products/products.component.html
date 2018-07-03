@@ -34,7 +34,7 @@
                     <div class="ui-g-10 ui-sm-6"><b>{{product.type}}</b></div>
 
                     <div class="ui-g-2 ui-sm-6">Prix: </div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.price}}</b></div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{product.price}} €</b></div>
                 </div>
             </div>
             <div class="ui-g-12 ui-md-1 search-icon">
@@ -46,7 +46,7 @@
         <div style="padding:.5em" class="ui-g-12 ui-md-3">
             <p-panel [header]="product.ref" [style]="{'text-align':'center'}">
                 <img src="{{product.picture}}" width="60">
-                <div class="product-detail">{{product.name}} - {{product.price}}</div>
+                <div class="product-detail">{{product.name}} - {{product.price}} €</div>
                 <hr class="ui-widget-content" style="border-top:0">
                 <button pButton type="button" icon="pi pi-search" (click)="selectProduct($event, car)" style="margin-top:0"></button>
             </p-panel>
@@ -54,7 +54,7 @@
     </ng-template>
 </p-dataView>
 
-<p-dialog header="Détails du produit" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="225" (onAfterHide)="onDialogHide()">
+<p-dialog header="Détails du produit" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500" (onAfterHide)="onDialogHide()">
     <div class="ui-g" *ngIf="selectedProduct">
         <div class="ui-g-12" style="text-align:center">
             <img src="{{selectedProduct.picture}}">
@@ -69,6 +69,6 @@
         <div class="ui-g-8">{{selectedProduct.type}}</div>
 
         <div class="ui-g-4">Prix: </div>
-        <div class="ui-g-8">{{selectedProduct.price}}</div>
+        <div class="ui-g-8">{{selectedProduct.price}} €</div>
     </div>
 </p-dialog>

@@ -1,0 +1,66 @@
+<div class="container">
+  <form [formGroup]="formulaire">
+
+    <div>
+
+      <div>
+        <h2>Nouveau Produit</h2>
+        <hr>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="nom">Nom: </label>
+            <input class="form-control" id="nom" formControlName="nom" name="nom" type="text">
+
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="prix">Prix: </label>
+            <input class="form-control" id="prix" formControlName="prix" name="prix" type="text">
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="description">Description: </label>
+            <textarea class="form-control" id="description" formControlName="description" name="description" type="text"></textarea>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="type">Type: </label>
+            <input class="form-control" id="type" formControlName="type" name="type" type="text">
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="annee">Année d'édition: </label>
+            <p-calendar class="form-control" id="annee" formControlName="annee" name="annee" type="date"></p-calendar>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="editeur">Editeur: </label>
+            <input class="form-control ui-fluid" id="editeur" formControlName="editeur" name="editeur" type="text">
+          </span>
+        </div>
+      </div>
+      <!--Upload image à ajouter-->
+
+
+      <button class="btn btn-success" type="button" (click)="onSubmit()">Créer</button>
+    </div>
+  </form>
+</div>
