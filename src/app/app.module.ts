@@ -13,6 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
 
 // Components
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductService } from './product.service';
 import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
@@ -52,7 +55,10 @@ const appRoutes: Routes = [
     MenubarModule,
     MenuModule,
     DataViewModule,
-	  TableModule
+    TableModule,
+    DropdownModule,
+    PanelModule,
+    DialogModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
