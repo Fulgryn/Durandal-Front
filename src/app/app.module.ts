@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
-import {CalendarModule} from 'primeng/calendar';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DataViewModule } from 'primeng/dataview';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 
 // Components
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductService } from './product.service';
 import { OrderAdminComponent } from './order-admin/order-admin.component';
+import { ProductsComponent } from './products/products.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     HomeComponent,
     InscriptionComponent,
     ProductDetailsComponent,
-OrderAdminComponent
+    OrderAdminComponent,
+    ProductsComponent
   ],
   imports: [
     CalendarModule,
@@ -50,8 +52,7 @@ OrderAdminComponent
     MenubarModule,
     MenuModule,
     DataViewModule,
-	TableModule
-
+	  TableModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
