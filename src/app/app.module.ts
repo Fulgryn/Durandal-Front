@@ -27,6 +27,11 @@ import { ProductsComponent } from './products/products.component';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 
+// Spring security
+import { AppService } from './app.service';
+import { HttpClientModule } from '@angular/common/http';
+
+
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
@@ -44,6 +49,7 @@ const appRoutes: Routes = [
     ProductsComponent
   ],
   imports: [
+    HttpClientModule,
     CalendarModule,
     InputTextareaModule,
     ReactiveFormsModule,
@@ -60,7 +66,10 @@ const appRoutes: Routes = [
     PanelModule,
     DialogModule
   ],
-  providers: [ProductService],
+  providers: [
+      AppService,      
+      ProductService      
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

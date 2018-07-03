@@ -8,6 +8,8 @@ import {Md5} from 'ts-md5/dist/md5';
 
 
 import {User} from '../user';
+import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-connexion',
@@ -18,11 +20,11 @@ export class FormConnexionComponent implements OnInit {
   model: User ;
   pass: string| Int32Array;
 
-  login: boolean;
+  isLogedIn: boolean;
   formulaire: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private app : AppService, private router:Router) {
 
-    this.login = true; // style: display true html
+    this.isLogedIn = true; // style: display true html
     this.formulaire = fb.group({
       logEmail: ['',  Validators.compose([Validators.minLength(5), Validators.required])],
       logPassword : ['', Validators.pattern('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]
@@ -34,8 +36,19 @@ export class FormConnexionComponent implements OnInit {
 
   onSubmit() {
     // this.userService.connect(this.model).subscribe();
-    this.pass = Md5.hashAsciiStr(this.formulaire.get('logPassword').value);
-    alert('mdp: ' + this.pass);
+    /*this.pass = Md5.hashAsciiStr(this.formulaire.get('logPassword').value);
+    alert('mdp: ' + this.pass);*/
+    var email = this.formulaire.get('logEmail').value;
+    var password = this.formulaire.get('logPassword').value;
+    this.login(email, password);
+  }
+
+  login(email : String, password : String) {
+    var credentials = {email, password};
+    this.app.authenticate(credentials, () => {
+        this.router.navigateByUrl('/');
+    });
+    return false;
   }
 
 
