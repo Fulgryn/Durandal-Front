@@ -23,10 +23,10 @@ export class AppComponent {
     }
 
     logout() {
-        this.http.post(Config.restApi.concat('/logout'), {}).subscribe(() => {
-            this.app.authenticated = false;
-            this.router.navigateByUrl('/login');
-        });
+        console.log("logout???");
+        this.app.logout(() => {
+            console.log("return logout");
+        })
     }
 
     ngOnInit() {

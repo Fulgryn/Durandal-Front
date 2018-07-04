@@ -8,6 +8,7 @@ import { Config } from './config';
 export class AppService {
 
     authenticated = false;
+    email = "";
 
     constructor(private http: HttpClient) {
     }
@@ -18,15 +19,35 @@ export class AppService {
             authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.password)
         } : {});
 
-        this.http.get(Config.restApi.concat('/user'), { headers: headers }).subscribe(response => {
-            console.log(response);
+        this.http.get(Config.restApi.concat('/user'), { headers: headers }).subscribe(
+        response => {
             if (response != null) {
                 this.authenticated = true;
+                this.email = response['name'];
+                console.log("loged in !");
             } else {
                 this.authenticated = false;
             }
             return callback && callback();
-        });
+        },
+        error => {
+            return callback && callback();
+        }
+        );
+    }
 
+    logout(callback) {
+        /*this.http.post(Config.restApi.concat('/logout'), {}).subscribe(
+        () => {
+            this.authenticated = false;
+            console.log("loged out !");
+
+            return callback && callback();
+        }, 
+        error =>  {
+            return callback && callback();
+        });*/
+        this.authenticated = false;
+        this.email = "";
     }
 }

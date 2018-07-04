@@ -12,7 +12,9 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>-->
-      <a class="btn btn-outline-success my-2 my-sm-0 espace" routerLink="/Connexion">Connexion</a>
+      <a class="btn btn-outline-success my-2 my-sm-0 espace" [style.display]="this.app.authenticated ? 'none' : ''" routerLink="/Connexion">Connexion</a>
+      <p [style.display]="this.app.authenticated ? '' : 'none'">Bienvenue {{this.app.email}}</p>
+      <a class="btn btn-outline-success my-2 my-sm-0 espace" [style.display]="this.app.authenticated ? '' : 'none'" (click)="logout()">Déconnexion</a>
     </form>
     
   </div>

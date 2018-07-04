@@ -14,6 +14,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 // Components
 import { AppComponent } from './app.component';
@@ -33,43 +36,46 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
-  { path: 'Connexion', component: FormConnexionComponent },
-  { path: '', component: HomeComponent },
-  { path: 'Inscription', component: InscriptionComponent },
+    { path: 'Connexion', component: FormConnexionComponent },
+    { path: '', component: HomeComponent },
+    { path: 'Inscription', component: InscriptionComponent },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FormConnexionComponent,
-    HomeComponent,
-    InscriptionComponent,
-    ProductDetailsComponent,
-    OrderAdminComponent,
-    ProductsComponent
-  ],
-  imports: [
-    HttpClientModule,
-    CalendarModule,
-    InputTextareaModule,
-    ReactiveFormsModule,
-    FormsModule,
-    InputTextModule,
-    BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MenubarModule,
-    MenuModule,
-    DataViewModule,
-    TableModule,
-    DropdownModule,
-    PanelModule,
-    DialogModule
-  ],
-  providers: [
-      AppService,      
-      ProductService      
+    declarations: [
+        AppComponent,
+        FormConnexionComponent,
+        HomeComponent,
+        InscriptionComponent,
+        ProductDetailsComponent,
+        OrderAdminComponent,
+        ProductsComponent
     ],
-  bootstrap: [AppComponent]
+    imports: [
+        HttpClientModule,
+        CalendarModule,
+        InputTextareaModule,
+        ReactiveFormsModule,
+        FormsModule,
+        InputTextModule,
+        BrowserModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        MenubarModule,
+        MenuModule,
+        DataViewModule,
+        TableModule,
+        DropdownModule,
+        PanelModule,
+        DialogModule,
+        MessagesModule,
+        MessageModule
+    ],
+    providers: [
+        AppService,
+        ProductService,
+        MessageService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
