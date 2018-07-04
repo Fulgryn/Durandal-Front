@@ -27,12 +27,15 @@ import { ProductsComponent } from './products/products.component';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
 
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
   { path: 'Inscription', component: InscriptionComponent },
-  { path: 'AddProduct', component: CreateProductComponent }
+  { path: 'AddProduct', component: CreateProductComponent },
+  { path: 'GestionProduit', component: GestionProduitComponent },
+  { path: 'GestionCommandes', component: CreateProductComponent }
 ];
 
 @NgModule({
@@ -44,7 +47,8 @@ const appRoutes: Routes = [
     ProductDetailsComponent,
     OrderAdminComponent,
     ProductsComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    GestionProduitComponent
   ],
   imports: [
     CalendarModule,
