@@ -11,7 +11,7 @@ export class CreateProductComponent implements OnInit {
 
   formulaire: FormGroup;
   newProduct: Product;
-  ref : string;
+  ref: string;
 
   constructor(@Inject(FormBuilder) private fb: FormBuilder) {
 
@@ -31,8 +31,8 @@ export class CreateProductComponent implements OnInit {
 
   onSubmit() {
     alert(this.formulaire.status);
-    
-    this.ref = this.formulaire.get('type').value.substring(0,3)+Math.floor(Math.random() * (9999 - 1000));
+
+    this.ref = this.formulaire.get('type').value.substring(0,3) + Math.floor(Math.random() * (9999 - 1000));
     this.newProduct = new Product(this.ref,
                                   this.formulaire.get('nom').value,
                                    0,

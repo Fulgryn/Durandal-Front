@@ -1,11 +1,18 @@
-<h3>
-  Gestion des Produits</h3>
-<hr>
-
 <div class="container">
+  <h2>Gestion des Produits</h2>
+  <hr>
+
+
   <button class="btn btn-primary" routerLink="/AddProduct">
     Ajouter un produit
   </button>
 </div>
 
-<app-products></app-products>
+<br>
+
+<div class="container" style="display: block;">
+
+  <app-products [admin]=true></app-products> 
+  <!-- modifié le admin = true en quelquechose de plus secure-->
+
+</div>

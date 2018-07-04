@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // PrimeNG items
 import { MenubarModule } from 'primeng/menubar';
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     GestionProduitComponent
   ],
   imports: [
+    HttpClientModule,
     CalendarModule,
     InputTextareaModule,
     ReactiveFormsModule,
