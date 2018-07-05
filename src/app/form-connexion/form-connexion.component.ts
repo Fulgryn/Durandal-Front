@@ -11,6 +11,8 @@ import { User } from '../user';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
 
+import { AppComponent } from '../app.component'
+
 // PrimeNG bulles loginFail
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Message } from 'primeng/api';
@@ -52,11 +54,12 @@ export class FormConnexionComponent implements OnInit {
     login(email: String, password: String) {
         var credentials = { email, password };
         this.app.authenticate(credentials, () => {
-            if (this.app.authenticated) {
+            if (this.app.access.isAuthenticated) { 
                 this.router.navigateByUrl('/');
+                //this.app.getAccess
             } else {
                 this.msgs = [];
-                this.msgs.push({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+                this.msgs.push({ severity: 'error', summary: 'Erreur de connexion', detail: 'Vérifiez vos identifiants' });
             }
         });
         return false;

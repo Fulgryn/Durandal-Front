@@ -17,6 +17,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 // Components
 import { AppComponent } from './app.component';
@@ -27,18 +29,24 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductService } from './product.service';
 import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
-import { PanelModule } from 'primeng/panel';
-import { DialogModule } from 'primeng/dialog';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
 
 // Spring security
 import { AppService } from './app.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// Authentication
+import { AuthInterceptor } from './auth.interceptor';
 
 
 const appRoutes: Routes = [
-    { path: 'Connexion', component: FormConnexionComponent },
-    { path: '', component: HomeComponent },
-    { path: 'Inscription', component: InscriptionComponent },
+  { path: 'Connexion', component: FormConnexionComponent },
+  { path: '', component: HomeComponent },
+  { path: 'Inscription', component: InscriptionComponent },
+  { path: 'AddProduct', component: CreateProductComponent },
+  { path: 'GestionProduit', component: GestionProduitComponent },
+  { path: 'GestionCommandes', component: CreateProductComponent }
 ];
 
 @NgModule({
@@ -49,7 +57,9 @@ const appRoutes: Routes = [
         InscriptionComponent,
         ProductDetailsComponent,
         OrderAdminComponent,
-        ProductsComponent
+        ProductsComponent,
+	    CreateProductComponent,
+    	GestionProduitComponent
     ],
     imports: [
         HttpClientModule,
@@ -74,7 +84,12 @@ const appRoutes: Routes = [
     providers: [
         AppService,
         ProductService,
-        MessageService
+        MessageService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+          }
     ],
     bootstrap: [AppComponent]
 })

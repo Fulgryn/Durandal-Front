@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Config } from './config';
+import { RouterLink } from '@angular/router';
+import { UserService } from './user.service';
+import { User } from './user';
 
 @Component({
     selector: 'app-root',
@@ -11,36 +14,31 @@ import { Config } from './config';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Durandal';
-
-    data = {};
-    urlApiDetails = 'visitor/details';
-
-    items: MenuItem[];
-
     constructor(private app: AppService, private http: HttpClient, private router: Router) {
-        this.app.authenticate(undefined, undefined);        
+        this.app.authenticate(
+            undefined, 
+            () => {
+                this.router.navigateByUrl('/');         
+            }
+        );
+    }
+
+    public isAuthenticated() {
+        return this.app.access.isAuthenticated;
+    }
+
+    public isAdmin() {
+        return this.app.access.isAdmin;
+    }
+
+    public getUsername() {
+        return this.app.access.email;
     }
 
     logout() {
-        console.log("logout???");
-        this.app.logout(() => {
-            console.log("return logout");
-        })
+        this.app.logout(() => {});
     }
 
-    ngOnInit() {
-        //on changera ici le menu en fonction du niveau d'authentification
-        this.items = [
-            {
-                label: 'Accueil',
-                routerLink: '/'
-
-            },
-            {
-                label: 'Mon Panier',
-                routerLink: '/Cart'
-            }
-        ];
+    ngOnInit() {               
     }
 }

@@ -8,7 +8,7 @@
           <hr>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="email">Email: </label>
               <input class="form-control" id="email" formControlName="email" name="email" type="text" size="30" >
@@ -18,7 +18,7 @@
         </div>
   
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="pass1">Mot de passe: </label>
               <input class="form-control" id="pass1" formControlName="password" name="password" type="text" size="30" pPassword>
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="pass2">Confirmer votre mot de passe: </label>
               <input class="form-control" id="pass2" formControlName="password" name="password" type="password" size="30" pPassword>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="nom">Nom: </label>
               <input class="form-control" id="nom" formControlName="nom" name="nom" type="text" size="30" >
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="nom">Prénom: </label>
               <input class="form-control" id="prenom" formControlName="prenom" name="prenom" type="text" size="30" >
@@ -50,15 +50,15 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="adresse">Adresse: </label>
-              <textarea class="form-control" id="adresse" formControlName="adresse" name="adresse" type="text" size="30" pInputTextarea></textarea>
+              <textarea class="form-control" id="adresse" formControlName="adresse" name="adresse" type="text"></textarea>
             </span>
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="tel">Téléphone: </label>
               <input class="form-control" id="tel" formControlName="tel" name="tel" type="tel" size="30" >
@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup" style="display: block;">
+          <div class="ui-inputgroup">
             <span>
               <label for="naissance">Date de naissance: </label>
               <p-calendar class="form-control" id="naissance" formControlName="naissance" name="naissance" type="date" size="30" ></p-calendar>
@@ -75,7 +75,7 @@
         </div>
 
 
-        <button pButton class="btn btn-success" type="button" (click)="onSubmit()">Ajouter</button>
+        <button pButton class="btn btn-success" type="button" (click)="onSubmit()">Créer</button>
       </div>
     </form>
   </div>

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from './config';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AppService {
+    public access : Access = new Access();
 
-    authenticated = false;
-    email = "";
-
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) {     
     }
 
     authenticate(credentials, callback) {
@@ -20,34 +19,47 @@ export class AppService {
         } : {});
 
         this.http.get(Config.restApi.concat('/user'), { headers: headers }).subscribe(
-        response => {
-            if (response != null) {
-                this.authenticated = true;
-                this.email = response['name'];
-                console.log("loged in !");
-            } else {
-                this.authenticated = false;
+            response => {
+                console.log(response);
+                if (response != null) {
+                    if (credentials) {
+                        sessionStorage.setItem('auth', btoa(credentials.email + ':' + credentials.password));
+                    } 
+                    
+                    this.access.isAuthenticated = true;
+                    this.access.email = response['name'];
+                    this.access.isAdmin = response['authorities'][0]['authority'] === "ADMIN";
+                    console.log("loged in ! As : " + this.access);
+                } else {
+                    this.access.isAuthenticated = false;
+                    this.access.isAdmin = false;
+                    this.access.email = "";
+                }
+
+                return callback && callback();
+            },
+            error => {
+                return callback && callback();
             }
-            return callback && callback();
-        },
-        error => {
-            return callback && callback();
-        }
         );
     }
 
     logout(callback) {
-        /*this.http.post(Config.restApi.concat('/logout'), {}).subscribe(
-        () => {
-            this.authenticated = false;
-            console.log("loged out !");
+        this.access.isAuthenticated = false;
+        this.access.isAdmin = false;
+        this.access.email = "";
+        sessionStorage.setItem('auth', "");
 
-            return callback && callback();
-        }, 
-        error =>  {
-            return callback && callback();
-        });*/
-        this.authenticated = false;
-        this.email = "";
+        return callback && callback();
+    }    
+}
+
+export class Access {
+    isAuthenticated : boolean = false;
+    isAdmin : boolean = false;
+    email : string = "";
+
+    toString() {
+        return "{Access : isAuthenticated="+this.isAuthenticated+" isAdmin="+this.isAdmin+" email="+this.email+"}";
     }
 }

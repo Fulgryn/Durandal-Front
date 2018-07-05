@@ -1,22 +1,32 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Durandal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="#">Durandal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngFor="let i of items">
-        <a class="nav-link" [routerLink]="i.routerLink">{{i.label}}</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>-->
-      <a class="btn btn-outline-success my-2 my-sm-0 espace" [style.display]="this.app.authenticated ? 'none' : ''" routerLink="/Connexion">Connexion</a>
-      <p [style.display]="this.app.authenticated ? '' : 'none'">Bienvenue {{this.app.email}}</p>
-      <a class="btn btn-outline-success my-2 my-sm-0 espace" [style.display]="this.app.authenticated ? '' : 'none'" (click)="logout()">Déconnexion</a>
-    </form>
-    
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/Cart">Mon Panier</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/GestionProduit" *ngIf="isAdmin()">Gestion des produits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/GestionCommandes" *ngIf="isAdmin()">Gestion des Commandes</a>
+            </li>            
+        </ul>
+        
+        <form class="form-inline my-2 my-lg-0">
+            <span class="navbar-text mr-sm-2" *ngIf="isAuthenticated()" >Bienvenue {{getUsername()}}</span>
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>-->
+            <a class="btn btn-outline-success my-2 my-sm-0 espace" *ngIf="!isAuthenticated()" routerLink="/Connexion">Connexion</a>            
+            <a class="btn btn-outline-success my-2 my-sm-0 espace" *ngIf="isAuthenticated()"  routerLink="#" (click)="logout()">Déconnexion</a>
+        </form>
+    </div>
 </nav>
 <router-outlet></router-outlet>
