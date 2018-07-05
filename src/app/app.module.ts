@@ -31,6 +31,8 @@ import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart.service';
 
 // Spring security
 import { AppService } from './app.service';
@@ -40,13 +42,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 
 
+
 const appRoutes: Routes = [
-  { path: 'Connexion', component: FormConnexionComponent },
-  { path: '', component: HomeComponent },
-  { path: 'Inscription', component: InscriptionComponent },
-  { path: 'AddProduct', component: CreateProductComponent },
-  { path: 'GestionProduit', component: GestionProduitComponent },
-  { path: 'GestionCommandes', component: CreateProductComponent }
+    { path: 'Connexion', component: FormConnexionComponent },
+    { path: '', component: HomeComponent },
+    { path: 'Inscription', component: InscriptionComponent },
+    { path: 'AddProduct', component: CreateProductComponent },
+    { path: 'GestionProduit', component: GestionProduitComponent },
+    { path: 'GestionCommandes', component: CreateProductComponent },
+    { path: 'Cart', component: CartComponent }
 ];
 
 @NgModule({
@@ -58,8 +62,9 @@ const appRoutes: Routes = [
         ProductDetailsComponent,
         OrderAdminComponent,
         ProductsComponent,
-	CreateProductComponent,
-    	GestionProduitComponent
+        CreateProductComponent,
+        GestionProduitComponent,
+        CartComponent
     ],
     imports: [
         HttpClientModule,
@@ -85,11 +90,12 @@ const appRoutes: Routes = [
         AppService,
         ProductService,
         MessageService,
+        CartService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
-          }
+        }
     ],
     bootstrap: [AppComponent]
 })

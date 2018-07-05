@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from './../product';
 import { ProductService } from '../product.service';
 import { SelectItem } from 'primeng/api';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-products',
@@ -28,7 +29,7 @@ export class ProductsComponent implements OnInit {
   sortOrder: number;
 
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private cartService : CartService) {
     this.productService = productService;
     this.products = [];
   }
@@ -48,6 +49,10 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
     this.displayDialog = true;
     event.preventDefault();
+  }
+
+  addToCart(product: Product) {
+      this.cartService.addToCart(product, 1);
   }
 
   onSortChange(event) {
