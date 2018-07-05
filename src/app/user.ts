@@ -2,8 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 
 export class User {
-
-    role: String;
+    admin: boolean;
     id: number;
     email: string;
     passHash: String | Int32Array;
@@ -16,7 +15,7 @@ export class User {
     constructor() {
         this.email = null;
         this.passHash = null;
-        this.role = 'admin';
+        this.admin = false;
     }
 
 }

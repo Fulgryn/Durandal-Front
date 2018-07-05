@@ -12,7 +12,7 @@ export class CreateProductComponent implements OnInit {
 
   formulaire: FormGroup;
   newProduct: Product;
-  ref: string;
+  ref : string;
 
   constructor(@Inject(FormBuilder) private fb: FormBuilder, private productService: ProductService) {
     this.productService = productService;
@@ -71,4 +71,3 @@ export class CreateProductComponent implements OnInit {
   }
 
 }
-//[disabled]="!formulaire.valid"

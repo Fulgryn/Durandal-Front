@@ -30,4 +30,8 @@ export class ProductService {
     this.http.post<Product>(Config.restApi+'/produit', this.httpOptions).subscribe();
     
  }
+  isOrdered(): Observable<Object> {
+    return this.http.get( Config.restApi.concat('/produitoredered'));
+    // NOT WORKING
+  }
 }

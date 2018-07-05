@@ -4,3 +4,7 @@ img {
     height: auto;
     width: auto;
 }
+
+.edit-btn {
+    margin: 5px;
+}

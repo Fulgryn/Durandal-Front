@@ -10,7 +10,6 @@ import { Config } from './config';
 export class UserService {
 
   head = new HttpHeaders().append('Content-Type', 'Application/json');
-  url  = Config.restApi;
 
 
   constructor(private http: HttpClient ) { }
@@ -29,4 +28,5 @@ export class UserService {
      JSON.stringify(user), { headers: this.head});
 
   }
+
 }
