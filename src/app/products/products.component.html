@@ -19,12 +19,12 @@
     </div>
   </p-header>
   <ng-template let-product pTemplate="listItem">
-    <div class="ui-g" (mouseover)="setOrderedState()" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+    <div class="ui-g element">
 
-      <div class="ui-g-12 ui-md-3" style="text-align:center">
+      <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-3" style="text-align:center">
         <img src="{{product.picture}}">
       </div>
-      <div class="ui-g-12 ui-md-8 car-details">
+      <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-8 car-details">
         <div class="ui-g">
           <div class="ui-g-2 ui-sm-6">Référence: </div>
           <div class="ui-g-10 ui-sm-6">
@@ -51,9 +51,9 @@
       <div class="ui-g-12 ui-md-1 search-icon">
         <button pButton type="button" class="edit-btn" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
 
-        <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="delProduct($event, product)"></button>
+        <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="updateProduct($event, product)"></button>
         <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delProduct($event, product)"></button>
-        
+
 
       </div>
     </div>
@@ -61,16 +61,16 @@
   <ng-template let-product pTemplate="gridItem">
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
       <p-panel [header]="product.ref" [style]="{'text-align':'center'}">
-        <img src="{{product.picture}}" width="60">
-        <div class="product-detail">{{product.name}} - {{product.price}} €</div>
-        <hr class="ui-widget-content" style="border-top:0">
+        <div class="element">
+          <img src="{{product.picture}}" width="60">
+          <div class="product-detail">{{product.name}} - {{product.price}} €</div>
+          <hr class="ui-widget-content" style="border-top:0">
 
-        <button pButton type="button" class="edit-btn" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
+          <button pButton type="button" class="edit-btn" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
 
-        <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="none"></button>
-        <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash"
-          (click)="delDialog()"></button>
-        
+          <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="none"></button>
+          <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delDialog()"></button>
+        </div>
       </p-panel>
     </div>
   </ng-template>
@@ -96,14 +96,47 @@
   </div>
 </p-dialog>
 
-<p-dialog header="Détails du produit" [(visible)]="displayDialog2" [responsive]="true" showEffect="fade" [modal]="true" width="500"
+<p-dialog header="Voulez vous vraiment supprimer ce produit ?" [(visible)]="displayDialog2" [responsive]="true" showEffect="fade"
+  [modal]="true" width="500" (onAfterHide)="onDialogHide()">
+  <div class="container ui-g" *ngIf="selectedProduct">
+    <div class="ui-g-12" style="text-align:center">
+      <img src="{{selectedProduct.picture}}">
+    </div>
+    <div class="ui-g-4">Référence: </div>
+    <div class="ui-g-8">{{selectedProduct.ref}}</div>
+
+    <div class="ui-g-4">Nom: </div>
+    <div class="ui-g-8">{{selectedProduct.name}}</div>
+
+    <div *ngIf !="isOrdered">
+      <div class="text-danger ui-g-4">Attention: </div>
+      <div class="ui-g-8">
+        <p class="text-danger">Ce produit est en cours de commande , vous ne pouvez que le désactivé</p>
+      </div>
+    </div>
+    <div *ngIf="isOrdered">
+      <div class="ui-g-8">
+        <p class="text-warning">Etes vous sur de vouloir Supprimé ce produit de la Base de donnée ?</p>
+      </div>
+    </div>
+    <div >
+      <button *ngIf != "isOrdered" class="validation btn btn-warning "  role="button" type="button">Desactivation </button>    
+      <button *ngIf="isOrdered" class="validation btn btn-danger "  role="button" type="button">Supprimé </button>    
+      <br>
+      <br>
+      <button class=" validation btn btn-default active" aria-pressed="true" type="button"> Annulé </button>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog header="Modification des produits" [(visible)]="displayDialog3" [responsive]="true" showEffect="fade" [modal]="true" width="500"
   (onAfterHide)="onDialogHide()">
   <div class="ui-g" *ngIf="selectedProduct">
     <div class="ui-g-12" style="text-align:center">
       <img src="{{selectedProduct.picture}}">
     </div>
     <div class="ui-g-4">Référence: </div>
-    <div class="ui-g-8">{{selectedProduct.ref}}</div>
+    <input class="ui-g-8">
 
     <div class="ui-g-4">Nom: </div>
     <div class="ui-g-8">{{selectedProduct.name}}</div>

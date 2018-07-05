@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit {
 
   sortOrder: number;
 
+  isOrdered: boolean = true;
 
   constructor(private productService: ProductService) {
     this.productService = productService;
