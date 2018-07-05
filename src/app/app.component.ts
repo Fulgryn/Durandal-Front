@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AppService } from './app.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Config } from './config';
 import { RouterLink } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user';
@@ -10,45 +14,31 @@ import { User } from './user';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Durandal';
-    admin = 'admin';
-    items: MenuItem[];
+    constructor(private app: AppService, private http: HttpClient, private router: Router) {
+        this.app.authenticate(
+            undefined, 
+            () => {
+                this.router.navigateByUrl('/');         
+            }
+        );
+    }
 
-    ngOnInit() {
-        // on changera ici le menu en fonction du niveau d'authentification
-        console.log(new User().role);
-        if ( new User().role === this.admin) {
-            this.items = [
-                {
-                    label: 'Accueil',
-                    routerLink: '/'
+    public isAuthenticated() {
+        return this.app.access.isAuthenticated;
+    }
 
-                },
-                {
-                    label: 'Mon Panier',
-                    routerLink: '/Cart'
-                },
-                {
-                    label: 'Gestion des produits',
-                    routerLink: '/GestionProduit'
-                },
-                {
-                    label: 'Gestion des Commandes',
-                    routerLink: '/GestionCommandes'
-                }
-            ];
-        } else {
-            this.items = [
-                {
-                    label: 'Accueil',
-                    routerLink: '/'
+    public isAdmin() {
+        return this.app.access.isAdmin;
+    }
 
-                },
-                {
-                    label: 'Mon Panier',
-                    routerLink: '/Cart'
-                }
-            ];
-        }
+    public getUsername() {
+        return this.app.access.email;
+    }
+
+    logout() {
+        this.app.logout(() => {});
+    }
+
+    ngOnInit() {               
     }
 }
