@@ -27,7 +27,7 @@ export class ProductService {
   addProduct(product: Product) {
     //this.myPonies.push(pony);
     //alert(JSON.stringify(pony));
-    this.http.post<Product>(Config.restApi+'/produit', this.httpOptions).subscribe();
+    this.http.post<Product>(Config.restApi+'/addProduit', product, this.httpOptions).subscribe();
     
  }
   isOrdered(): Observable<Object> {
