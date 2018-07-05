@@ -15,6 +15,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 // Components
 import { AppComponent } from './app.component';
@@ -30,6 +35,14 @@ import { DialogModule } from 'primeng/dialog';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
 
+// Spring security
+import { AppService } from './app.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// Authentication
+import { AuthInterceptor } from './auth.interceptor';
+
+
 const appRoutes: Routes = [
   { path: 'Connexion', component: FormConnexionComponent },
   { path: '', component: HomeComponent },
@@ -40,36 +53,47 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FormConnexionComponent,
-    HomeComponent,
-    InscriptionComponent,
-    ProductDetailsComponent,
-    OrderAdminComponent,
-    ProductsComponent,
-    CreateProductComponent,
-    GestionProduitComponent
-  ],
-  imports: [
-    HttpClientModule,
-    CalendarModule,
-    InputTextareaModule,
-    ReactiveFormsModule,
-    FormsModule,
-    InputTextModule,
-    BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MenubarModule,
-    MenuModule,
-    DataViewModule,
-    TableModule,
-    DropdownModule,
-    PanelModule,
-    DialogModule
-  ],
-  providers: [ProductService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FormConnexionComponent,
+        HomeComponent,
+        InscriptionComponent,
+        ProductDetailsComponent,
+        OrderAdminComponent,
+        ProductsComponent,
+	CreateProductComponent,
+    	GestionProduitComponent
+    ],
+    imports: [
+        HttpClientModule,
+        CalendarModule,
+        InputTextareaModule,
+        ReactiveFormsModule,
+        FormsModule,
+        InputTextModule,
+        BrowserModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        MenubarModule,
+        MenuModule,
+        DataViewModule,
+        TableModule,
+        DropdownModule,
+        PanelModule,
+        DialogModule,
+        MessagesModule,
+        MessageModule
+    ],
+    providers: [
+        AppService,
+        ProductService,
+        MessageService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+          }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

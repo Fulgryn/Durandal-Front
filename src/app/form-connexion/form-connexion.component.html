@@ -2,6 +2,10 @@
 
 
   <div>
+    <div id="loginFailed">
+        <p-messages [(value)]="msgs"></p-messages>
+    </div>
+
     <br>
     <!-- Nav tabs -->
     <div class="btn btn-group justify-content-md-center" >
@@ -45,7 +49,7 @@
             </div>
           </div>
 
-          <button pButton class="btn btn-success" type="button" (click)="onSubmit()">Ajouter</button>
+          <button pButton class="btn btn-success" type="submit" (click)="onSubmit()">Ajouter</button>
         </form>
       </div>
 
