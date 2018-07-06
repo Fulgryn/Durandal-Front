@@ -61,7 +61,7 @@ const appRoutes: Routes = [
         ProductDetailsComponent,
         OrderAdminComponent,
         ProductsComponent,
-	CreateProductComponent,
+	    CreateProductComponent,
     	GestionProduitComponent
     ],
     imports: [
@@ -90,7 +90,7 @@ const appRoutes: Routes = [
         AppService,
         ProductService,
         MessageService,
-	UserService,
+	    UserService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

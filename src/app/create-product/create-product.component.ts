@@ -50,8 +50,6 @@ export class CreateProductComponent implements OnInit {
         //this.formulaire.get('annee').value,
         this.formulaire.get('editeur').value,
         this.picture)
-      //alert(JSON.stringify(this.newProduct));
-      //this.productService.addProduct(this.newProduct);
       this.msgs = [];
       this.msgs.push({severity: 'success', summary: 'Produit ajouté!', detail: ''});
     } else {
@@ -61,7 +59,6 @@ export class CreateProductComponent implements OnInit {
       });
       this.msgs = [];
       this.msgs.push({severity: 'error', summary: 'Produit invalide', detail: ''});
-      //alert("Produit invalide");
     }
   }
 

@@ -1,5 +1,5 @@
 export class Product {
-    //id: number;
+    id: number;
     //ref: string;
     name: string;
     quantity: number;
@@ -11,19 +11,9 @@ export class Product {
     picture: string;
 
 
-    /*constructor(id: number, name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string){
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.type = type;
-        //this.year = year;
-        this.editor = editor;
-        this.picture = picture;
-    }*/
 
-    constructor(name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string){
+
+    constructor(name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string, id?:number){
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -32,5 +22,6 @@ export class Product {
         //this.year = year;
         this.editor = editor;
         this.picture = picture;
+        this.id = id;
     }
 }

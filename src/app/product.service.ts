@@ -8,17 +8,10 @@ import { Config } from './config';
 @Injectable()
 export class ProductService {
   products = new Array<Product>();
-  // urlService: string;
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
-    })
-  };
-
-  httpOptionsImage = {
-    headers: new HttpHeaders({
-      //'Content-Type':  'image/*'
     })
   };
 
@@ -31,15 +24,12 @@ export class ProductService {
   }
 
   uploadImage(image: any) {
-    //this.myPonies.push(pony);
-    //alert(JSON.stringify(pony));
-    this.http.post(Config.restApi+'/uploadImage', image/*, this.httpOptionsImage*/).subscribe();
+
+    this.http.post(Config.restApi+'/uploadImage', image).subscribe();
     
  }
 
   addProduct(product: Product) {
-    //this.myPonies.push(pony);
-    //alert(JSON.stringify(pony));
     this.http.post<Product>(Config.restApi+'/addProduit', product, this.httpOptions).subscribe();
     
  }
