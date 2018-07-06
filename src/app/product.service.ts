@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Product } from './Product';
 import { PRODUCTS } from './mock-products';
 import { Observable, of } from 'rxjs';
@@ -27,11 +27,27 @@ export class ProductService {
   addProduct(product: Product) {
     //this.myPonies.push(pony);
     //alert(JSON.stringify(pony));
-    this.http.post<Product>(Config.restApi+'/produit', this.httpOptions).subscribe();
-    
+    this.http.post<Product>(Config.restApi + '/addProduit', product, this.httpOptions).subscribe();
+
  }
   isOrdered(): Observable<Object> {
     return this.http.get( Config.restApi.concat('/produitoredered'));
     // NOT WORKING
   }
+
+  deleteProduct(product: Product, callback)  {
+    return this.http.delete(Config.restApi + '/produit?id=' + product.id, this.httpOptions).subscribe(callback);
+  }
+
+  desactivateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/desactivation?id=' + product.id, this.httpOptions).subscribe();
+  }
+  activateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/activation?id=' + product.id, this.httpOptions).subscribe();
+  }
+  updateProduct(product: Product)  {
+
+    return this.http.put(Config.restApi + '/produit', product , this.httpOptions).subscribe( );
+  }
+
 }

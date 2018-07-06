@@ -19,7 +19,7 @@
     </div>
   </p-header>
   <ng-template let-product pTemplate="listItem">
-    <div class="ui-g element">
+    <div class="ui-g"  style="padding: 2em;border-bottom: 1px solid #d9d9d9">
 
       <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-3" style="text-align:center">
         <img src="{{product.picture}}">
@@ -51,8 +51,8 @@
       <div class="ui-g-12 ui-md-1 search-icon">
         <button pButton type="button" class="edit-btn" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
 
-        <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="updateProduct($event, product)"></button>
-        <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delProduct($event, product)"></button>
+        <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="updateDialog($event, product)"></button>
+        <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delDialog($event, product)"></button>
 
 
       </div>
@@ -68,8 +68,8 @@
 
           <button pButton type="button" class="edit-btn" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
 
-          <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="none"></button>
-          <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delDialog()"></button>
+          <button *ngIf="admin" pButton class=" edit-btn ui-button-warning" type="button" icon="fa fa-edit" (click)="updateDialog($event, product)"></button>
+          <button pButton *ngIf="admin" class=" edit-btn ui-button-danger" type="button" icon="fa fa-trash" (click)="delDialog($event, product)"></button>
         </div>
       </p-panel>
     </div>
@@ -96,35 +96,35 @@
   </div>
 </p-dialog>
 
+
 <p-dialog header="Voulez vous vraiment supprimer ce produit ?" [(visible)]="displayDialog2" [responsive]="true" showEffect="fade"
   [modal]="true" width="500" (onAfterHide)="onDialogHide()">
   <div class="container ui-g" *ngIf="selectedProduct">
+    
     <div class="ui-g-12" style="text-align:center">
       <img src="{{selectedProduct.picture}}">
     </div>
-    <div class="ui-g-4">Référence: </div>
-    <div class="ui-g-8">{{selectedProduct.ref}}</div>
-
+    
     <div class="ui-g-4">Nom: </div>
     <div class="ui-g-8">{{selectedProduct.name}}</div>
 
     <div *ngIf !="isOrdered">
       <div class="text-danger ui-g-4">Attention: </div>
       <div class="ui-g-8">
-        <p class="text-danger">Ce produit est en cours de commande , vous ne pouvez que le désactivé</p>
+        <p class="text-warning">Ce produit est en cours de commande , vous ne pouvez que le désactivé</p>
       </div>
     </div>
     <div *ngIf="isOrdered">
       <div class="ui-g-8">
-        <p class="text-warning">Etes vous sur de vouloir Supprimé ce produit de la Base de donnée ?</p>
+        <p class="text-danger">Etes vous sur de vouloir Supprimé ce produit de la Base de donnée ?</p>
       </div>
     </div>
     <div >
-      <button *ngIf != "isOrdered" class="validation btn btn-warning "  role="button" type="button">Desactivation </button>    
-      <button *ngIf="isOrdered" class="validation btn btn-danger "  role="button" type="button">Supprimé </button>    
+      <button *ngIf = "selectedProduct.enabled && !isOrdered" class="validation btn btn-warning " (click)="desactivateProduct($event,selectedProduct)"  role="button" type="button">Desactivation </button>    
+      <button *ngIf="isOrdered" class="validation btn btn-danger " (click)="delProduct($event, selectedProduct)" role="button" type="button">Supprimer </button>    
       <br>
       <br>
-      <button class=" validation btn btn-default active" aria-pressed="true" type="button"> Annulé </button>
+      <button class=" validation btn btn-default active" aria-pressed="true" (click)="hide()" type="button"> Annuler </button>
     </div>
   </div>
 </p-dialog>
@@ -135,16 +135,71 @@
     <div class="ui-g-12" style="text-align:center">
       <img src="{{selectedProduct.picture}}">
     </div>
-    <div class="ui-g-4">Référence: </div>
-    <input class="ui-g-8">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="name">Nom: </label>
+            <input class="form-control" id="name" required [(ngModel)]="selectedProduct.name" name="name" type="text" size="30">
+          </span>
+        </div>
+      </div>
 
-    <div class="ui-g-4">Nom: </div>
-    <div class="ui-g-8">{{selectedProduct.name}}</div>
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="price">Prix: </label>
+            <input class="form-control" id="price" required [(ngModel)]="selectedProduct.price" name="price" type="text" size="30" >
+          </span>
+        </div>
+      </div>
 
-    <div class="ui-g-4">Type: </div>
-    <div class="ui-g-8">{{selectedProduct.type}}</div>
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="quantity">Quantité: </label>
+            <input class="form-control" id="quantity" required [(ngModel)]="selectedProduct.quantity" name="quantity" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="type">type: </label>
+            <input class="form-control" id="type" [(ngModel)]="selectedProduct.type" name="type" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="editor">editeur: </label>
+            <input class="form-control" id="editor" [(ngModel)]="selectedProduct.editor" name="editor" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup" style="display: block;">
+          <span>
+            <label for="description">Description: </label>
+            <textarea class="form-control" id="description" [(ngModel)]="selectedProduct.description" name="description" type="text" size="30" >
 
-    <div class="ui-g-4">Prix: </div>
-    <div class="ui-g-8">{{selectedProduct.price}} €</div>
+            </textarea>
+          </span>
+        </div>
+      </div>
+
+      <!-- LE CODE DE GABIN PR UPLOAD L'IMAGE -->
+
+      <input  class="validation text-warning " id="enabled" [(ngModel)]=selectedProduct.enabled name="enabled" type="checkbox">
+      <label *ngIf ="selectedProduct.enabled" for="enabled" class="text-success"> Visible sur le site </label>
+      <label *ngIf ="!selectedProduct.enabled" for="enabled" class="text-danger" > Invisible </label>
+      <br>
+      <br>
+      <button  class="validation btn btn-success" type="submit" (click)="updateProduct($event)">Ajouter</button>
+    </form>
+
+
+
   </div>
 </p-dialog>

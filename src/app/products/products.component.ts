@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
 
   displayDialog: boolean;
   displayDialog2: boolean;
+  displayDialog3: boolean;
 
   sortOptions: SelectItem[];
 
@@ -27,7 +28,7 @@ export class ProductsComponent implements OnInit {
 
   sortOrder: number;
 
-  isOrdered: boolean = true;
+  isOrdered: boolean = true; // EN ATTENDANT LES COMMANDES
 
   constructor(private productService: ProductService) {
     this.productService = productService;
@@ -67,10 +68,42 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
+  updateDialog(event: Event, product: Product) {
+    this.selectedProduct = product;
+    this.displayDialog3 = true;
+    event.preventDefault();
 
-  delProduct(event: Event, product: Product) {
+  }
+
+  delDialog(event: Event, product: Product) {
     this.selectedProduct = product;
     this.displayDialog2 = true;
     event.preventDefault();
+  }
+
+  hide() {
+    this.displayDialog2 = true;
+    event.preventDefault();
+  }
+
+  updateProduct(event: Event, product: Product) {
+    this.productService.updateProduct(product);
+    this.displayDialog2 = false;
+    event.preventDefault();
+  }
+  delProduct(event: Event, product: Product) {
+    this.productService.deleteProduct(product);
+    this.displayDialog2 = false;
+    event.preventDefault();
+  }
+  desactivateProduct(event: Event, product: Product) {
+    this.productService.desactivateProduct(product);
+    this.displayDialog2 = false;
+    event.preventDefault();
+
+  }
+  activateProduct(event: Event, product: Product) {
+    this.productService.desactivateProduct(product);
+    this.displayDialog3 = false;
   }
 }
