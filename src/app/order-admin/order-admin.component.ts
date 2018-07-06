@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderAdminComponent implements OnInit {
 
+    searchClientID
+
   constructor() { }
 
   ngOnInit() {
   }
+
+search(query: String){
+
+}
 
 }

@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 // PrimeNG items
 import { MenubarModule } from 'primeng/menubar';
@@ -18,8 +17,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { PanelModule } from 'primeng/panel';
-import { DialogModule } from 'primeng/dialog';
 
 // Components
 import { AppComponent } from './app.component';

@@ -22,7 +22,7 @@
     <div class="ui-g element">
 
       <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-3" style="text-align:center">
-        <img src="{{product.picture}}">
+        <img src="{{picture(product.picture)}}"  >
       </div>
       <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-8 car-details">
         <div class="ui-g">
@@ -62,7 +62,7 @@
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
       <p-panel [header]="product.ref" [style]="{'text-align':'center'}">
         <div class="element">
-          <img src="{{product.picture}}" width="60">
+          <img src="{{picture(product.picture)}}" width="60">
           <div class="product-detail">{{product.name}} - {{product.price}} €</div>
           <hr class="ui-widget-content" style="border-top:0">
 
@@ -80,7 +80,7 @@
   (onAfterHide)="onDialogHide()">
   <div class="ui-g" *ngIf="selectedProduct">
     <div class="ui-g-12" style="text-align:center">
-      <img src="{{selectedProduct.picture}}">
+      <img src="{{picture(selectedProduct.picture)}}">
     </div>
     <div class="ui-g-4">Référence: </div>
     <div class="ui-g-8">{{selectedProduct.ref}}</div>
