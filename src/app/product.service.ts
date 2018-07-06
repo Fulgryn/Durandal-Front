@@ -17,6 +17,10 @@ export class ProductService {
     return of(this.products);
   }
 
+  getProductByID(id : number) : Observable<Product> { 
+    return this.http.get<Product>(Config.restApi.concat('/produit'), {params : {'id' : ""+id}}); 
+  }
+
   isOrdered(): Observable<Object> {
     return this.http.get( Config.restApi.concat('/produitoredered'));
     // NOT WORKING

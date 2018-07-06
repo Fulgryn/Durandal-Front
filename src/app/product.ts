@@ -1,4 +1,5 @@
 export class Product {
+    id: number = 42;
     ref: string;
     name: string;
     quantity: number;
@@ -9,10 +10,9 @@ export class Product {
     editor: string;
     picture: string;
 
-
     constructor(ref: string, name: string, quantity: number,
-                price: number, description: string, type: string,
-                year: Date, editor: string, picture: string) {
+        price: number, description: string, type: string,
+        year: Date, editor: string, picture: string) {
         this.ref = ref;
         this.name = name;
         this.quantity = quantity;
@@ -23,5 +23,4 @@ export class Product {
         this.editor = editor;
         this.picture = picture;
     }
-
 }

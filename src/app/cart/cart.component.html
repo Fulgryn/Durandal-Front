@@ -1,3 +1,38 @@
-<p>
-  cart works!
-</p>
+<div>
+    <p-dataScroller [value]="productsInCart" [rows]="10">
+        <ng-template let-product pTemplate="item">
+            <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                <div class="ui-g-12 ui-md-3" style="text-align:center">
+                    <img src="{{product.picture}}">
+                </div>
+                <div class="ui-g-12 ui-md-8 car-details">
+                    <div class="ui-g">
+                        <div class="ui-g-2 ui-sm-6">Référence: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{product.ref}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Nom: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{product.name}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Type: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{product.type}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Prix: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{product.price}} €</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-1 search-icon">
+
+                </div>
+            </div>
+        </ng-template>
+    </p-dataScroller>
+</div>
