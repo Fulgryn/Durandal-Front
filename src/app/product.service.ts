@@ -16,6 +16,12 @@ export class ProductService {
     })
   };
 
+  httpOptionsImage = {
+    headers: new HttpHeaders({
+      //'Content-Type':  'image/*'
+    })
+  };
+
   constructor(private http: HttpClient) { 
     this.products = PRODUCTS;
   }
@@ -23,6 +29,13 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return of(this.products);
   }
+
+  uploadImage(image: any) {
+    //this.myPonies.push(pony);
+    //alert(JSON.stringify(pony));
+    this.http.post(Config.restApi+'/uploadImage', image/*, this.httpOptionsImage*/).subscribe();
+    
+ }
 
   addProduct(product: Product) {
     //this.myPonies.push(pony);

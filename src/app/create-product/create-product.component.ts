@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-create-product',
@@ -12,10 +13,14 @@ export class CreateProductComponent implements OnInit {
 
   formulaire: FormGroup;
   newProduct: Product;
-  ref : string;
+  //ref : string;
+  fileToUpload: File  = null;
+  msgs: Message[];
+  picture: string = null;
 
   constructor(@Inject(FormBuilder) private fb: FormBuilder, private productService: ProductService) {
     this.productService = productService;
+    
 
     this.formulaire = this.fb.group({
       nom: ['', Validators.required],
@@ -32,9 +37,9 @@ export class CreateProductComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formulaire.valid) {
+    if (this.formulaire.valid && this.picture != null) {
       console.log('form submitted');
-      this.ref = this.formulaire.get('type').value.substring(0, 3) + Math.floor(Math.random() * (9999 - 1000));
+      //this.ref = this.formulaire.get('type').value.substring(0, 3) + Math.floor(Math.random() * (9999 - 1000));
       this.newProduct = new Product(
         //this.ref,
         this.formulaire.get('nom').value,
@@ -44,19 +49,20 @@ export class CreateProductComponent implements OnInit {
         this.formulaire.get('type').value,
         //this.formulaire.get('annee').value,
         this.formulaire.get('editeur').value,
-        '')
-      alert(JSON.stringify(this.newProduct));
-      this.productService.addProduct(this.newProduct);
-      // this.userService.connect(this.model).subscribe();
+        this.picture)
+      //alert(JSON.stringify(this.newProduct));
+      //this.productService.addProduct(this.newProduct);
+      this.msgs = [];
+      this.msgs.push({severity: 'success', summary: 'Produit ajouté!', detail: ''});
     } else {
       Object.keys(this.formulaire.controls).forEach(field => {
         const control = this.formulaire.get(field);
         control.markAsTouched({ onlySelf: true });
       });
-      alert("Produit invalide");
+      this.msgs = [];
+      this.msgs.push({severity: 'error', summary: 'Produit invalide', detail: ''});
+      //alert("Produit invalide");
     }
-    //alert(this.formulaire.status);
-
   }
 
   isFieldValid(field: string) {
@@ -69,5 +75,15 @@ export class CreateProductComponent implements OnInit {
       'has-feedback': this.isFieldValid(field)
     };
   }
+
+  myUploader(files: FileList) {
+    let formData = new FormData();
+      formData.append('file', files[0]);
+      this.picture = "/image/"+files[0].name;
+    this.productService.uploadImage(formData);
+    this.msgs = [];
+    this.msgs.push({severity: 'info', summary: 'Image téléversée', detail: ''});
+}
+
 
 }

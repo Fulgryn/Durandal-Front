@@ -64,9 +64,15 @@
           </span>
         </div>
       </div>
-      <!--Upload image à ajouter-->
-
-
+      <!--Upload image à ajouter
+         <input type="file" (change)="onFileChanged($event)" #fileInput>
+      <button (click)="onUpload()">Upload!</button>
+      -->
+      <p-growl [value]="msgs" baseZIndex="100"></p-growl>
+      
+      <label>Image: </label>
+      <p-fileUpload name="myfile[]" accept="image/*" customUpload="true" (uploadHandler)="myUploader($event.files)"></p-fileUpload>
+     
       <button class="btn btn-success" type="submit" (click)="onSubmit()" >Créer</button>
     </div>
   </form>

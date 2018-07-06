@@ -19,6 +19,8 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { GrowlModule } from 'primeng/growl';
 
 // Components
 import { AppComponent } from './app.component';
@@ -81,7 +83,8 @@ const appRoutes: Routes = [
         DialogModule,
         MessagesModule,
         MessageModule,
-	HttpClientModule
+        FileUploadModule,
+        GrowlModule
     ],
     providers: [
         AppService,
