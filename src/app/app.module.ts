@@ -19,6 +19,8 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { GrowlModule } from 'primeng/growl';
 
 // Components
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
+import { UserService } from './user.service';
 
 // Spring security
 import { AppService } from './app.service';
@@ -79,12 +82,15 @@ const appRoutes: Routes = [
         PanelModule,
         DialogModule,
         MessagesModule,
-        MessageModule
+        MessageModule,
+        FileUploadModule,
+        GrowlModule
     ],
     providers: [
         AppService,
         ProductService,
         MessageService,
+	UserService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
