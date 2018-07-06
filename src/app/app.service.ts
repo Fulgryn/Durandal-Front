@@ -28,7 +28,7 @@ export class AppService {
                     
                     this.access.isAuthenticated = true;
                     this.access.email = response['name'];
-                    this.access.isAdmin = response['authorities'][0]['authority'] === "ADMIN";
+                    this.access.isAdmin = response['authorities'][0]['authority'] === "ROLE_ADMIN";
                     console.log("loged in ! As : " + this.access);
                 } else {
                     this.access.isAuthenticated = false;

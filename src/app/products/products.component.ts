@@ -1,23 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, DoCheck, OnInit, Input } from '@angular/core';
 import { Product } from './../product';
 import { ProductService } from '../product.service';
 import { SelectItem } from 'primeng/api';
-import { Config } from '../config'
+import { Config } from '../config';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements DoCheck, OnInit {
 
 
     @Input() admin: boolean;
     products: Array<Product>;
+    newproducts: Array<Product>;
+    router : Router;
 
     selectedProduct: Product;
 
     displayDialog: boolean;
     displayDialog2: boolean;
+    displayDialog3: boolean;
 
     sortOptions: SelectItem[];
 
@@ -27,18 +31,26 @@ export class ProductsComponent implements OnInit {
 
     sortOrder: number;
 
-    isOrdered: boolean = true;
+    isOrdered: boolean = true; // EN ATTENDANT LES COMMANDES
+
 
     constructor(private productService: ProductService) {
         this.productService = productService;
         this.products = [];
+        this.newproducts = this.products;
     }
 
+    ngDoCheck() {
+        if (this.newproducts !== this.products) {
+            this.newproducts = this.products;
+        }
+    }
     ngOnInit() {
-
-        let result: Object;
         this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
         console.log(this.products);
+
+
+
 
         this.sortOptions = [
             { label: 'Nom', value: 'name' },
@@ -70,8 +82,14 @@ export class ProductsComponent implements OnInit {
         this.selectedProduct = null;
     }
 
+    updateDialog(event: Event, product: Product) {
+        this.selectedProduct = product;
+        this.displayDialog3 = true;
+        event.preventDefault();
 
-    delProduct(event: Event, product: Product) {
+    }
+
+    delDialog(event: Event, product: Product) {
         this.selectedProduct = product;
         this.displayDialog2 = true;
         event.preventDefault();
@@ -81,4 +99,48 @@ export class ProductsComponent implements OnInit {
         return Config.restApi + pictPath;
     }
 
+    hide() {
+        this.displayDialog2 = true;
+        event.preventDefault();
+    }
+
+    updateProduct(event: Event, product: Product) {
+        this.productService.updateProduct(product);
+        this.displayDialog2 = false;
+        event.preventDefault();
+
+        //refresh des données en bases :
+        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
+
+    }
+    delProduct(event: Event, product: Product) {
+        //
+        // this.newproducts = this.products.splice(this.products.lastIndexOf( product) );
+        // this.products =[...this.newproducts];
+
+        this.productService.deleteProduct(product);
+        this.displayDialog2 = false;
+        event.preventDefault();
+
+        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
+
+        // reload pas au bon path :(
+        // location.reload();
+        }
+
+
+    desactivateProduct(event: Event, product: Product) {
+        this.productService.desactivateProduct(product);
+        this.displayDialog2 = false;
+        event.preventDefault();
+        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
+
+
+    }
+    activateProduct(event: Event, product: Product) {
+        this.productService.desactivateProduct(product);
+        this.displayDialog3 = false;
+        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
+
+    }
 }

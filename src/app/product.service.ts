@@ -7,19 +7,48 @@ import { Config } from './config';
 
 @Injectable()
 export class ProductService {
-    products = new Array<Product>();
-    // urlService: string;
-    constructor(private http: HttpClient) {
-        this.products = [];
-    }
+  products = new Array<Product>();
+  // urlService: string;
 
-    getProducts() : Observable<Object> {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+
+  constructor(private http: HttpClient) { 
+    this.products = [];
+  }
+
+   getProducts() : Observable<Object> {
         
         return this.http.get(Config.restApi.concat('/produits'));
     }
-    isOrdered() {
-        return this.http.get(Config.restApi.concat('/produitoredered'));
-        // NOT WORKING
-    }
+
+  addProduct(product: Product) {
+    //this.myPonies.push(pony);
+    //alert(JSON.stringify(pony));
+    this.http.post<Product>(Config.restApi + '/addProduit', product, this.httpOptions).subscribe();
+
+ }
+  isOrdered(): Observable<Object> {
+    return this.http.get( Config.restApi.concat('/produitoredered'));
+    // NOT WORKING
+  }
+
+  deleteProduct(product: Product)  {
+    return this.http.delete(Config.restApi + '/produit?id=' + product.id, this.httpOptions).subscribe();
+  }
+
+  desactivateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/desactivation?id=' + product.id, this.httpOptions).subscribe();
+  }
+  activateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/activation?id=' + product.id, this.httpOptions).subscribe();
+  }
+  updateProduct(product: Product)  {
+
+    return this.http.put(Config.restApi + '/produit', product , this.httpOptions).subscribe( );
+  }
 
 }
