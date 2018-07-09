@@ -13,7 +13,9 @@ export class Product {
 
 
 
-    constructor(name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string, id?:number){
+    constructor(name: string, quantity: number, price: number,
+         description: string, type: string, editor: string,
+          picture: string, id?:number){
         this.name = name;
         this.quantity = quantity;
         this.price = price;

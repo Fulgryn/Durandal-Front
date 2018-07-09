@@ -17,7 +17,7 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
 
-    return this.http.post<User>( Config.restApi.concat('/login') ,
+    return this.http.post<User>( Config.restApi.concat('/addUser') ,
       JSON.stringify(user), { headers: this.head});
 
   }
