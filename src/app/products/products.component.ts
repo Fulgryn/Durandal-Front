@@ -15,7 +15,7 @@ export class ProductsComponent implements DoCheck, OnInit {
     @Input() admin: boolean;
     products: Array<Product>;
     newproducts: Array<Product>;
-    router : Router;
+    router: Router;
 
     selectedProduct: Product;
 
@@ -31,7 +31,7 @@ export class ProductsComponent implements DoCheck, OnInit {
 
     sortOrder: number;
 
-    isOrdered: boolean = true; // EN ATTENDANT LES COMMANDES
+    isOrdered = true; // EN ATTENDANT LES COMMANDES
 
 
     constructor(private productService: ProductService) {
@@ -46,7 +46,14 @@ export class ProductsComponent implements DoCheck, OnInit {
         }
     }
     ngOnInit() {
-        this.productService.getProducts().subscribe((prods: Array<Product>) => {this.products = prods ; console.log(this.products);});
+        this.productService.getProducts().subscribe((prods: Array<Product>) => {
+            this.products = prods;
+            setTimeout(() => {
+                this.sortField = "price";
+                this.sortOrder = 1;
+            }, 50);
+            console.log(this.products);
+        });
 
 
         this.sortOptions = [
@@ -106,8 +113,8 @@ export class ProductsComponent implements DoCheck, OnInit {
         this.displayDialog2 = false;
         event.preventDefault();
 
-        //refresh des données en bases :
-        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
+        // refresh des données en bases :
+        // this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
 
     }
     delProduct(event: Event, product: Product) {
@@ -115,15 +122,27 @@ export class ProductsComponent implements DoCheck, OnInit {
         // this.newproducts = this.products.splice(this.products.lastIndexOf( product) );
         // this.products =[...this.newproducts];
 
-        this.productService.deleteProduct(product);
+        this.productService.deleteProduct(product).subscribe(() => {
+            this.productService.getProducts().subscribe((prods: Array<Product>) => {
+                this.products = prods;
+                console.log(this.products);
+                setTimeout(() => {
+                    this.sortOrder = -this.sortOrder;
+                    console.log(this.products);
+                    setTimeout(() => {
+                        this.sortOrder = -this.sortOrder;
+                        console.log(this.products);
+                    }, 0);
+                }, 0);
+            });
+        });
         this.displayDialog2 = false;
         event.preventDefault();
 
-        this.productService.getProducts().subscribe((prods: Array<Product>) => this.products = prods);
 
         // reload pas au bon path :(
         // location.reload();
-        }
+    }
 
 
     desactivateProduct(event: Event, product: Product) {
