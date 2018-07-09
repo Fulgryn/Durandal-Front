@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from './Product';
-import { PRODUCTS } from './mock-products';
 import { Observable, of } from 'rxjs';
 import { Config } from './config';
 
@@ -16,25 +15,39 @@ export class ProductService {
   };
 
   constructor(private http: HttpClient) { 
-    this.products = PRODUCTS;
+    this.products = [];
   }
 
-  getProducts(): Observable<Product[]> {
-    return of(this.products);
-  }
+   getProducts() : Observable<Object> {
+        return this.http.get(Config.restApi.concat('/produits'));
+    }
 
   uploadImage(image: any) {
-
     this.http.post(Config.restApi+'/uploadImage', image).subscribe();
-    
  }
 
   addProduct(product: Product) {
     this.http.post<Product>(Config.restApi+'/addProduit', product, this.httpOptions).subscribe();
-    
  }
   isOrdered(): Observable<Object> {
     return this.http.get( Config.restApi.concat('/produitoredered'));
     // NOT WORKING
   }
+
+  deleteProduct(product: Product)  {
+    return this.http.delete(Config.restApi + '/produit?id=' + product.id, this.httpOptions).subscribe();
+  }
+
+  desactivateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/desactivation?id=' + product.id, this.httpOptions).subscribe();
+  }
+
+  activateProduct(product: Product)  {
+    return this.http.get(Config.restApi + '/produit/activation?id=' + product.id, this.httpOptions).subscribe();
+  }
+
+  updateProduct(product: Product)  {
+    return this.http.put(Config.restApi + '/produit', product , this.httpOptions).subscribe( );
+  }
+
 }

@@ -1,10 +1,30 @@
 img {
-    max-width: 120px;
-    max-height: 120px;
-    height: auto;
-    width: auto;
+  max-width: 120px;
+  max-height: 120px;
+  height: auto;
+  width: auto;
 }
 
 .edit-btn {
-    margin: 5px;
+  margin: 5px;
+}
+
+.element {
+  padding: 2em;
+  border-bottom: 1px solid #d9d9d9;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+}
+
+.element:hover {
+  background-color: #b3ffb3;
+  cursor: pointer;
+}
+
+
+.validation {
+    margin: 10px, 10px;
+    
 }
