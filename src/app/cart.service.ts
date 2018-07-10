@@ -17,21 +17,20 @@ export class CartService {
     }
 
     setCartString(cart: Cart) {
-        console.log("set " + cart.toString());
         sessionStorage.setItem('cart', cart.toString());
     }
 
     addToCart(product: Product, qty: number) {
         var cart: Cart = new Cart(this.getCartString());
         cart.addProduct(product, qty);
-        console.log(cart.toString());
         this.setCartString(cart);
     }
 
     remove(product: Product, qty: number) {
         var cart: Cart = new Cart(this.getCartString());
-        cart.remove(product, qty);
+        var needsRefresh = cart.remove(product, qty);
         this.setCartString(cart);
+        return needsRefresh;
     }
 
     removeAll(product: Product) {
@@ -43,24 +42,27 @@ export class CartService {
 
     getProductsInCart(): Product[] {
         var cart: Cart = new Cart(this.getCartString());
-        var products : Product[] = [];
+        var products: Product[] = [];
         for (var item in cart.getItems()) {
-            console.log(item);
-            console.log(item + " : " + cart.getQuantity(item));
-            this.productService.getProductByID(Number(item)).subscribe(p => { products.push(p); });            
+            this.productService.getProductByID(Number(item)).subscribe(p => { products.push(p); });
         }
         return products;
     }
 
-    constructor(private productService : ProductService) { }
+    getProductQuantity(product: Product) {
+        var cart: Cart = new Cart(this.getCartString());
+        return cart.getQuantity(product);
+    }
+
+    constructor(private productService: ProductService) { }
 }
 
 class Cart {
-    map;
+    map: Map<number, number>;
 
     constructor(stringJSON: string) {
         if (stringJSON == undefined || stringJSON === "[]" || stringJSON === "") {
-            this.map = [];
+            this.map = new Map<number, number>();
         } else {
             this.map = JSON.parse(stringJSON);
         }
@@ -75,14 +77,17 @@ class Cart {
     }
 
     removeAll(p: Product) {
-        this.map[p.id] = 0;
+        delete this.map[p.id];
+        return true;
     }
 
     remove(p: Product, qty: number) {
         if (this.map[p.id] != undefined && this.map[p.id] > qty) {
             this.map[p.id] -= qty;
+            return false;
         } else {
-            this.map[p.id] = 0;
+            this.removeAll(p);
+            return true;
         }
     }
 
@@ -91,7 +96,7 @@ class Cart {
     }
 
     getQuantity(item) {
-        return this.map[item];
+        return this.map[item.id];
     }
 
     toString() {

@@ -1,0 +1,19 @@
+.petitCarre {
+    margin-top:5px; 
+    margin-bottom:5px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align:center;
+}
+
+.total {
+    float:right;   
+    font-size:1.5em;
+    margin: 10px;
+}
+
+.total-btn {
+    float:right;
+    margin: 10px;
+}

@@ -19,6 +19,8 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { GrowlModule } from 'primeng/growl';
 import { DataScrollerModule } from 'primeng/datascroller';
 
 // Components
@@ -32,6 +34,7 @@ import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
+import { UserService } from './user.service';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
 
@@ -41,7 +44,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Authentication
 import { AuthInterceptor } from './auth.interceptor';
-
 
 
 const appRoutes: Routes = [
@@ -86,18 +88,21 @@ const appRoutes: Routes = [
         DialogModule,
         MessagesModule,
         MessageModule,
-        DataScrollerModule
+	FileUploadModule,
+        GrowlModule,
+	DataScrollerModule
     ],
     providers: [
         AppService,
         ProductService,
         MessageService,
-        CartService,
+	UserService,
+	CartService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
-        }
+          }
     ],
     bootstrap: [AppComponent]
 })

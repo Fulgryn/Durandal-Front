@@ -1,20 +1,23 @@
-<div>
+<div class="container">
+    <h2>Mon panier</h2>
+    <hr>
+
     <p-dataScroller [value]="productsInCart" [rows]="10">
         <ng-template let-product pTemplate="item">
             <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
                 <div class="ui-g-12 ui-md-3" style="text-align:center">
-                    <img src="{{product.picture}}">
+                    <img src="{{picture(product.picture)}}">
                 </div>
-                <div class="ui-g-12 ui-md-8 car-details">
+                <div class="ui-g-12 ui-md-7">
                     <div class="ui-g">
-                        <div class="ui-g-2 ui-sm-6">Référence: </div>
-                        <div class="ui-g-10 ui-sm-6">
-                            <b>{{product.ref}}</b>
-                        </div>
-
                         <div class="ui-g-2 ui-sm-6">Nom: </div>
                         <div class="ui-g-10 ui-sm-6">
                             <b>{{product.name}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Editeur: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{product.editor}}</b>
                         </div>
 
                         <div class="ui-g-2 ui-sm-6">Type: </div>
@@ -29,10 +32,19 @@
                     </div>
                 </div>
 
-                <div class="ui-g-12 ui-md-1 search-icon">
-
+                <div class="ui-g-12 ui-md-2">
+                    <button pButton type="button" class="edit-btn petitCarre" icon="fa fa-plus" (click)="addToCart(product, 1)"></button>
+                    <p class="petitCarre">{{getQuantity(product)}}</p>
+                    <button pButton type="button" class="edit-btn petitCarre" icon="fa fa-minus" (click)="remove(product, 1)"></button>
+                    <button pButton type="button" class="edit-btn ui-button-danger petitCarre" icon="fa fa-trash" (click)="removeAll(product)"></button>
+                    <p class="petitCarre">Total : {{getTotalByProduct(product)}} €</p>
                 </div>
             </div>
         </ng-template>
     </p-dataScroller>
+    <div>
+        <p class="total">Total : {{getTotal()}} €</p>
+        <button class="total-btn btn btn-success" type="submit" (click)="onSubmit()">Confirmer commande</button>
+    </div>
+
 </div>

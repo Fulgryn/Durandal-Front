@@ -25,7 +25,7 @@
             <span class="navbar-text mr-sm-2" *ngIf="isAuthenticated()" >Bienvenue {{getUsername()}}</span>
             <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>-->
             <a class="btn btn-outline-success my-2 my-sm-0 espace" *ngIf="!isAuthenticated()" routerLink="/Connexion">Connexion</a>            
-            <a class="btn btn-outline-success my-2 my-sm-0 espace" *ngIf="isAuthenticated()"  routerLink="#" (click)="logout()">Déconnexion</a>
+            <a class="btn btn-outline-success my-2 my-sm-0 espace" *ngIf="isAuthenticated()"  routerLink="/" (click)="logout()">Déconnexion</a>
         </form>
     </div>
 </nav>
