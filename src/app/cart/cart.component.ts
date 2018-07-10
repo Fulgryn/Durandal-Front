@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
 import { Config } from '../config';
+import { AppService } from '../app.service';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -12,7 +14,9 @@ export class CartComponent implements OnInit {
 
     productsInCart: Product[];
 
-    constructor(private cartService : CartService) { 
+    displayDialog = false;
+
+    constructor(private cartService : CartService, private appService : AppService, private router: Router) { 
 
     }
 
@@ -56,8 +60,16 @@ export class CartComponent implements OnInit {
 
 
     onSubmit() {
+        if (this.appService.access.isAuthenticated) {
+            this.displayDialog = true;
+        } else {
+            this.router.navigate(['/Connexion']);
+        }
         console.log("A voté!");
-        // TODO traiter commande
+    }
+
+    onDialogHide() {
+        this.displayDialog = false;
     }
 
 }
