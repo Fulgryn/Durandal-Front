@@ -22,12 +22,16 @@ export class ProductService {
     return this.http.get(Config.restApi.concat('/produits'));
   }
 
+  getProductByID(id : number) : Observable<Product> { 
+    return this.http.get<Product>(Config.restApi.concat('/produit'), {params : {'id' : ""+id}}); 
+  }
+
   uploadImage(image: any) {
-    this.http.post(Config.restApi + '/uploadImage', image);
+    return this.http.post(Config.restApi + '/uploadImage', image);
   }
 
   addProduct(product: Product) {
-    this.http.post<Product>(Config.restApi + '/addProduit', product, this.httpOptions);
+    return this.http.post<Product>(Config.restApi + '/addProduit', product, this.httpOptions);
   }
   isOrdered(): Observable<Object> {
     return this.http.get(Config.restApi.concat('/produitoredered'));

@@ -21,6 +21,7 @@ import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { GrowlModule } from 'primeng/growl';
+import { DataScrollerModule } from 'primeng/datascroller';
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,6 +35,8 @@ import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
 import { UserService } from './user.service';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart.service';
 
 // Spring security
 import { AppService } from './app.service';
@@ -44,12 +47,13 @@ import { AuthInterceptor } from './auth.interceptor';
 
 
 const appRoutes: Routes = [
-  { path: 'Connexion', component: FormConnexionComponent },
-  { path: '', component: HomeComponent },
-  { path: 'Inscription', component: InscriptionComponent },
-  { path: 'AddProduct', component: CreateProductComponent },
-  { path: 'GestionProduit', component: GestionProduitComponent },
-  { path: 'GestionCommandes', component: CreateProductComponent }
+    { path: 'Connexion', component: FormConnexionComponent },
+    { path: '', component: HomeComponent },
+    { path: 'Inscription', component: InscriptionComponent },
+    { path: 'AddProduct', component: CreateProductComponent },
+    { path: 'GestionProduit', component: GestionProduitComponent },
+    { path: 'GestionCommandes', component: CreateProductComponent },
+    { path: 'Cart', component: CartComponent }
 ];
 
 @NgModule({
@@ -61,8 +65,9 @@ const appRoutes: Routes = [
         ProductDetailsComponent,
         OrderAdminComponent,
         ProductsComponent,
-	CreateProductComponent,
-    	GestionProduitComponent
+        CreateProductComponent,
+        GestionProduitComponent,
+        CartComponent
     ],
     imports: [
         HttpClientModule,
@@ -84,18 +89,20 @@ const appRoutes: Routes = [
         MessagesModule,
         MessageModule,
         FileUploadModule,
-        GrowlModule
+        GrowlModule,
+        DataScrollerModule
     ],
     providers: [
         AppService,
         ProductService,
         MessageService,
-	UserService,
+        UserService,
+        CartService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
-          }
+        }
     ],
     bootstrap: [AppComponent]
 })

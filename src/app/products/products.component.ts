@@ -1,9 +1,11 @@
-import { Component, DoCheck, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { Product } from './../product';
 import { ProductService } from '../product.service';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, Message } from 'primeng/api';
 import { Config } from '../config';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
@@ -33,8 +35,9 @@ export class ProductsComponent implements DoCheck, OnInit {
 
     isOrdered = true; // EN ATTENDANT LES COMMANDES
 
+    msgs: Message[];
 
-    constructor(private productService: ProductService) {
+    constructor(private productService: ProductService, private cartService: CartService) {
         this.productService = productService;
         this.products = [];
         this.newproducts = this.products;
@@ -70,6 +73,12 @@ export class ProductsComponent implements DoCheck, OnInit {
         event.preventDefault();
     }
 
+    addToCart(product: Product) {
+        this.cartService.addToCart(product, 1);
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Produit ajouté au panier', detail: '' });
+    }
+
     onSortChange(event) {
         const value = event.value;
 
@@ -98,7 +107,6 @@ export class ProductsComponent implements DoCheck, OnInit {
         this.displayDialog2 = true;
         event.preventDefault();
     }
-
     picture(pictPath) {
         return Config.restApi + pictPath;
     }

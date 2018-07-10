@@ -52,7 +52,7 @@ export class CreateProductComponent implements OnInit {
                 this.picture)
             this.msgs = [];
             this.msgs.push({ severity: 'success', summary: 'Produit ajouté!', detail: '' });
-            this.productService.addProduct(this.newProduct);
+            this.productService.addProduct(this.newProduct).subscribe();
         } else {
             Object.keys(this.formulaire.controls).forEach(field => {
                 const control = this.formulaire.get(field);
@@ -78,7 +78,7 @@ export class CreateProductComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', files[0]);
         this.picture = "/image/" + files[0].name;
-        this.productService.uploadImage(formData);
+        this.productService.uploadImage(formData).subscribe();
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'Image téléversée', detail: '' });
     }
