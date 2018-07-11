@@ -1,0 +1,82 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+
+    <div>
+
+      <div>
+        <h2>Mon Compte</h2>
+        <hr>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="email">Email: </label>
+            <input class="form-control" id="email" [(ngModel)]="connectedUser.email" name="email" type="email" size="30" >
+
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="pass1">Mot de passe: </label>
+            <input class="form-control" id="pass1" [(ngModel)]="connectedUser.password" name="password" type="password" size="30" pPassword>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="pass2">Confirmer votre mot de passe: </label>
+            <input class="form-control" id="pass2" [(ngModel)]="connectedUser.password2" name="password" type="password" size="30" pPassword>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="firstName">Nom: </label>
+            <input class="form-control" id="firstName" [(ngModel)]="connectedUser.firstName" name="firstName" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="lastName">Prénom: </label>
+            <input class="form-control" id="lastName" [(ngModel)]="connectedUser.lastName" name="lastName" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="adresse">Adresse: </label>
+            <textarea class="form-control" id="adresse" [(ngModel)]="connectedUser.lastName" name="adresse" type="text"></textarea>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="phone">Téléphone: </label>
+            <input class="form-control" id="phone" [(ngModel)]="connectedUser.phone" name="phone" type="text" size="30" >
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span>
+            <label for="birthDate">Date de naissance: </label>
+            <input class="form-control" id="birthDate" [ngModel]="connectedUser.birthDate | date:'yyyy-MM-dd'" (ngModelChange)="connectedUser.birthDate" name="birthDate" type="date" size="30" />
+          </span>
+        </div>
+      </div>
+
+      <p-growl [value]="msgs" baseZIndex="100"></p-growl>
+
+      <button class="btn btn-success" type="button" (click)="onSubmit()">Modifier</button>
+    </div>
+  </form>
+</div>

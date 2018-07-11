@@ -1,0 +1,9 @@
+.ui-inputgroup{
+    display: block;
+}
+
+
+button{
+    display: flex; 
+    margin-left: auto;
+}

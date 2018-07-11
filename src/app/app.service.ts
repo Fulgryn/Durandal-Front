@@ -24,8 +24,7 @@ export class AppService {
                 if (response != null) {
                     if (credentials) {
                         sessionStorage.setItem('auth', btoa(credentials.email + ':' + credentials.password));
-                    } 
-                    
+                    }
                     this.access.isAuthenticated = true;
                     this.access.email = response['name'];
                     this.access.isAdmin = response['authorities'][0]['authority'] === "ROLE_ADMIN";

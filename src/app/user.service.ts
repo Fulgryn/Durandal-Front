@@ -22,11 +22,24 @@ export class UserService {
 
   }
 
+  updateUser(user: User): Observable<User> {
+    console.log("UPDATE");
+    console.log(JSON.stringify(user));
+    user.hashedPassword = user["password"];
+    return this.http.put<User>( Config.restApi.concat('/updateUser') ,
+      JSON.stringify(user), { headers: this.head});
+
+  }
+
   logUser(user: User): Observable<User> {
 
     return this.http.post<User>(  Config.restApi.concat('/user'), // Durandal avec majuscule ?
      JSON.stringify(user), { headers: this.head});
 
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>( Config.restApi.concat('/getUser'), { params: { 'email': email } });
   }
 
 }
