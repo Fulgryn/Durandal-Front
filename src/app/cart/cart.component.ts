@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { Config } from '../config';
 import { AppService } from '../app.service';
 import { RouterLink, Router } from '@angular/router';
+import { Message } from 'primeng/api';
 
 @Component({
     selector: 'app-cart',
@@ -15,8 +16,10 @@ export class CartComponent implements OnInit {
     productsInCart: Product[];
 
     displayDialog = false;
+    
+    msgs: Message[];
 
-    constructor(private cartService : CartService, private appService : AppService, private router: Router) { 
+    constructor(private cartService: CartService, private appService: AppService, private router: Router) {
 
     }
 
@@ -54,22 +57,32 @@ export class CartComponent implements OnInit {
 
     getTotal() {
         let total = 0.00;
-        this.productsInCart.forEach((product) => {total += this.cartService.getProductQuantity(product) * product.price})
+        this.productsInCart.forEach((product) => { total += this.cartService.getProductQuantity(product) * product.price })
         return total.toFixed(2);
     }
 
 
     onSubmit() {
         if (this.appService.access.isAuthenticated) {
-            this.displayDialog = true;
+            if (this.productsInCart.length > 0) {
+                this.displayDialog = true;
+            }            
         } else {
             this.router.navigate(['/Connexion']);
         }
-        console.log("A voté!");
     }
 
     onDialogHide() {
         this.displayDialog = false;
+    }
+
+    onCommandValidation() {
+        this.displayDialog = false;
+        this.cartService.validateCommand().subscribe(response => console.log(response));
+        this.productsInCart = [];
+        this.cartService.resetcart();
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Commande validée !', detail: '' });
     }
 
 }

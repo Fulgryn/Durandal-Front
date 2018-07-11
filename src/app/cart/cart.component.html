@@ -51,7 +51,9 @@
 <p-dialog header="Voulez vous confirmer votre commande ?" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
     [modal]="true" width="500" (onAfterHide)="onDialogHide()">
     <div class="container ui-g">
-        <button class="btn btn-danger" (click)="onDialogHide()" type="button"> Annuler </button>
-        <button class="btn btn-success" (click)="onDialogHide()" type="button"> Confirmer </button>
+        <button class="btn btn-danger" style="margin-left:80px;margin-right:auto;" (click)="onDialogHide()" type="button"> Annuler </button>
+        <button class="btn btn-success" style="margin-left:auto;margin-right:80px;" (click)="onCommandValidation()" type="button"> Confirmer </button>
     </div>
 </p-dialog>
+
+<p-growl [value]="msgs" baseZIndex="100"></p-growl>
