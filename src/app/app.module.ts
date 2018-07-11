@@ -46,6 +46,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Authentication
 import { AuthInterceptor } from './auth.interceptor';
+import { MyCommandsComponent } from './my-commands/my-commands.component';
 
 
 const appRoutes: Routes = [
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     { path: 'AddProduct', component: CreateProductComponent },
     { path: 'GestionProduit', component: GestionProduitComponent },
     { path: 'GestionCommandes', component: GestionCommandesComponent },
-    { path: 'Cart', component: CartComponent }
+    { path: 'Cart', component: CartComponent },
+    { path: 'myCommands', component: MyCommandsComponent }
 ];
 
 @NgModule({
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
         CreateProductComponent,
         GestionProduitComponent,
         GestionCommandesComponent,
-        CartComponent
+        CartComponent,
+        MyCommandsComponent
     ],
     imports: [
         HttpClientModule,
