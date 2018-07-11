@@ -12,10 +12,13 @@
                 <a class="nav-link" routerLink="/">Accueil</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" routerLink="/GestionProduit" *ngIf="isAuthenticated()">Mon Compte</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" routerLink="/Cart">Mon Panier</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/GestionProduit" *ngIf="isAdmin()">Gestion des produits</a>
+                <a class="nav-link" routerLink="/GestionProduit" *ngIf="isAdmin()">Gestion des Produits</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/GestionCommandes" *ngIf="isAdmin()">Gestion des Commandes</a>

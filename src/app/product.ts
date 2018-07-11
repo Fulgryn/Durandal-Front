@@ -10,8 +10,7 @@ export class Product {
     editor: string;
     picture: string;
 
-
-    constructor(name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string, id?: number) {
+    constructor(name: string, quantity: number, price: number, description: string, type: string, editor: string, picture: string, id?:number){
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -19,8 +18,8 @@ export class Product {
         this.type = type;
         this.editor = editor;
         this.picture = picture;
-        if (id != undefined) {
+	if (id != undefined) {
             this.id = id;
-        }
+	}
     }
 }
