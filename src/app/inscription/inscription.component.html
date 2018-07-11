@@ -10,7 +10,7 @@
         <div class="form-group">
           <div class="ui-inputgroup">
             <span>
-              <label for="email">Email: </label>
+              <label for="email">Email: <span class="text-danger">*</span></label>
               <input class="form-control" id="email" formControlName="email" name="email" type="text" size="30" >
   
             </span>
@@ -20,7 +20,8 @@
         <div class="form-group">
           <div class="ui-inputgroup">
             <span>
-              <label for="pass1">Mot de passe: </label>
+              <label for="pass1">Mot de passe: <span class="text-danger">*</span></label>
+              <p style="font-size: 70%;">( Le mot de passe doit être de 8 caractères minimum et contenir au moins une majuscule, une minuscule , 1 chiffre. )</p>
               <input class="form-control" id="pass1" formControlName="password" name="password" type="password" size="30" pPassword>
             </span>
           </div>
@@ -28,7 +29,7 @@
         <div class="form-group">
           <div class="ui-inputgroup">
             <span>
-              <label for="pass2">Confirmer votre mot de passe: </label>
+              <label for="pass2">Confirmer votre mot de passe: <span class="text-danger">*</span></label>
               <input class="form-control" id="pass2" formControlName="password2" name="password" type="password" size="30" pPassword>
             </span>
           </div>
@@ -36,7 +37,7 @@
         <div class="form-group">
           <div class="ui-inputgroup">
             <span>
-              <label for="nom">Nom: </label>
+              <label for="nom">Nom: <span class="text-danger">*</span></label>
               <input class="form-control" id="nom" formControlName="nom" name="nom" type="text" size="30" >
             </span>
           </div>
@@ -44,7 +45,7 @@
         <div class="form-group">
           <div class="ui-inputgroup">
             <span>
-              <label for="nom">Prénom: </label>
+              <label for="nom">Prénom: <span class="text-danger">*</span></label>
               <input class="form-control" id="prenom" formControlName="prenom" name="prenom" type="text" size="30" >
             </span>
           </div>
@@ -66,10 +67,10 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="ui-inputgroup">
+          <div class="ui-inputgroup ui-g ui-fluid">
             <span>
               <label for="naissance">Date de naissance: </label>
-              <p-calendar class="form-control" id="naissance" formControlName="naissance" name="naissance" type="date" size="30" ></p-calendar>
+              <p-calendar  class="border-right form-group" id="naissance" formControlName="naissance" name="naissance" size="30" > </p-calendar>
             </span>
           </div>
         </div>

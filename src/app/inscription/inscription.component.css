@@ -7,3 +7,9 @@ button{
     display: flex; 
     margin-left: auto;
 }
+
+
+.datepcalendar {
+    border: 1px solid gray;
+    border-radius: 3px;
+}

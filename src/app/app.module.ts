@@ -39,6 +39,9 @@ import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes
 import { UserService } from './user.service';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { MyCommandsComponent } from './my-commands/my-commands.component';
+
 
 // Spring security
 import { AppService } from './app.service';
@@ -46,7 +49,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Authentication
 import { AuthInterceptor } from './auth.interceptor';
-import { MyAccountComponent } from './my-account/my-account.component';
 
 
 const appRoutes: Routes = [
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
     { path: 'GestionCommandes', component: GestionCommandesComponent },
     { path: 'Cart', component: CartComponent },
     { path: 'Account', component: MyAccountComponent },
+    { path: 'myCommands', component: MyCommandsComponent }
 ];
 
 @NgModule({
@@ -74,6 +77,7 @@ const appRoutes: Routes = [
         GestionCommandesComponent,
         CartComponent,
         MyAccountComponent
+        MyCommandsComponent
     ],
     imports: [
         HttpClientModule,

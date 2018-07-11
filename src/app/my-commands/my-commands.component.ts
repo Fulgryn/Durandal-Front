@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommandService } from '../command.service';
 import { Command } from '../command';
+import { AppService } from '../app.service';
 
 @Component({
-    selector: 'app-gestion-commandes',
-    templateUrl: './gestion-commandes.component.html',
-    styleUrls: ['./gestion-commandes.component.css']
+    selector: 'app-my-commands',
+    templateUrl: './my-commands.component.html',
+    styleUrls: ['./my-commands.component.css']
 })
-export class GestionCommandesComponent implements OnInit {
+export class MyCommandsComponent implements OnInit {
 
     commands: Array<Command>;
 
-    constructor(private commandService: CommandService) { }
+    constructor(private commandService: CommandService, private appService: AppService) { }
 
     ngOnInit() {
-        this.commandService.getCommands().subscribe((c: Array<Command>) => {
+        this.commandService.getCommandsFrom(this.appService.access.email).subscribe((c: Array<Command>) => {            
             c.forEach(command => {
                 command.contenuCommande.forEach(contenu => {
                     contenu.priceByProduit = function() {
