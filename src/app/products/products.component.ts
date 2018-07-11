@@ -54,8 +54,7 @@ export class ProductsComponent implements DoCheck, OnInit {
             setTimeout(() => {
                 this.sortField = "price";
                 this.sortOrder = 1;
-            }, 50);
-            console.log(this.products);
+            }, 0);
         });
 
 

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product';
-import { forEach } from '@angular/router/src/utils/collection';
 import { ProductService } from './product.service';
+import { AppService } from './app.service';
+import { CommandService } from './command.service';
+import { Command } from 'protractor';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
+
+    constructor(private productService: ProductService, private appService: AppService, private commandService: CommandService) { }
 
     getCartString() {
         var stringCart: string = sessionStorage.getItem('cart');
@@ -39,6 +43,10 @@ export class CartService {
         this.setCartString(cart);
     }
 
+    resetcart() {
+        sessionStorage.setItem('cart', "{}");
+    }
+
 
     getProductsInCart(): Product[] {
         var cart: Cart = new Cart(this.getCartString());
@@ -54,7 +62,10 @@ export class CartService {
         return cart.getQuantity(product);
     }
 
-    constructor(private productService: ProductService) { }
+    validateCommand() {
+        var cart: Cart = new Cart(this.getCartString());
+        return this.commandService.addCommand(this.appService.access.email, cart.map);
+    }
 }
 
 class Cart {
