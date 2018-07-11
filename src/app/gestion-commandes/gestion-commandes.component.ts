@@ -15,6 +15,21 @@ export class GestionCommandesComponent implements OnInit {
 
     ngOnInit() {
         this.commandService.getCommands().subscribe((c: Array<Command>) => {
+            c.forEach(command => {
+                command.contenuCommande.forEach(contenu => {
+                    contenu.priceByProduit = function() {
+                        return this.quantity * this.product.price;
+                    }
+                })
+                command.totalPrice = function() {
+                    let total = 0.00;
+                    this.contenuCommande.forEach(element => {
+                        total += element.priceByProduit();
+                    });
+                    return total;
+                }
+            })          
+
             this.commands = c;
             console.log(this.commands);
         });

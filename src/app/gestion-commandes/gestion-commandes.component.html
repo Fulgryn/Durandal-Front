@@ -4,7 +4,7 @@
 <p-accordion [multiple]="true">
     <p-accordionTab *ngFor="let command of commands">
         <p-header>
-            id : {{command.id}} - client : {{command.client.email}}
+            id : {{command.id}} - client : {{command.client.email}} - Price : {{command.totalPrice().toFixed(2)}}
         </p-header>
         <p>Client : {{command.client.email}} - ID : {{command.client.id}} -  Adresse : {{command.client.adresse}} - Téléphone : {{command.client.telephone}}</p>
         <hr>
@@ -16,6 +16,7 @@
                     <th>Type</th>
                     <th>Editor</th>
                     <th>Quantity</th>
+                    <th>Price (Total : {{command.totalPrice().toFixed(2)}})</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-contenu>
@@ -25,6 +26,7 @@
                     <td>{{contenu.product.type}}</td>
                     <td>{{contenu.product.editor}}</td>
                     <td>{{contenu.quantity}}</td>
+                    <td>{{contenu.priceByProduit().toFixed(2)}}</td>
                 </tr>
             </ng-template>
         </p-table>

@@ -15,7 +15,22 @@ export class MyCommandsComponent implements OnInit {
     constructor(private commandService: CommandService, private appService: AppService) { }
 
     ngOnInit() {
-        this.commandService.getCommandsFrom(this.appService.access.email).subscribe((c: Array<Command>) => {
+        this.commandService.getCommandsFrom(this.appService.access.email).subscribe((c: Array<Command>) => {            
+            c.forEach(command => {
+                command.contenuCommande.forEach(contenu => {
+                    contenu.priceByProduit = function() {
+                        return this.quantity * this.product.price;
+                    }
+                })
+                command.totalPrice = function() {
+                    let total = 0.00;
+                    this.contenuCommande.forEach(element => {
+                        total += element.priceByProduit();
+                    });
+                    return total;
+                }
+            })          
+
             this.commands = c;
             console.log(this.commands);
         });
