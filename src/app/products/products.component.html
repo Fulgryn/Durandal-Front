@@ -20,7 +20,7 @@
         </div>
     </p-header>
     <ng-template let-product pTemplate="listItem">
-        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+        <div class="ui-g element" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
 
             <div (click)="selectProduct($event, product)" class="ui-g-12 ui-md-3" style="text-align:center">
                 <img src="{{picture(product.picture)}}">
@@ -99,6 +99,9 @@
 
         <div class="ui-g-4">Prix: </div>
         <div class="ui-g-8">{{selectedProduct.price}} €</div>
+
+        <div class="ui-g-4">Description: </div>
+        <div class="ui-g-8"><p class="product_detail">{{selectedProduct.description}}</p></div>
     </div>
 </p-dialog>
 
