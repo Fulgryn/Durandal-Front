@@ -21,7 +21,7 @@
           <div class="ui-inputgroup">
             <span>
               <label for="pass1">Mot de passe: </label>
-              <input class="form-control" id="pass1" formControlName="password" name="password" type="text" size="30" pPassword>
+              <input class="form-control" id="pass1" formControlName="password" name="password" type="password" size="30" pPassword>
             </span>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <div class="ui-inputgroup">
             <span>
               <label for="pass2">Confirmer votre mot de passe: </label>
-              <input class="form-control" id="pass2" formControlName="password" name="password" type="password" size="30" pPassword>
+              <input class="form-control" id="pass2" formControlName="password2" name="password" type="password" size="30" pPassword>
             </span>
           </div>
         </div>
@@ -74,6 +74,7 @@
           </div>
         </div>
 
+        <p-growl [value]="msgs" baseZIndex="100"></p-growl>
 
         <button class="btn btn-success" type="button" (click)="onSubmit()">Créer</button>
       </div>
