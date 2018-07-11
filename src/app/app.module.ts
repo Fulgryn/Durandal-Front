@@ -22,6 +22,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { GrowlModule } from 'primeng/growl';
 import { DataScrollerModule } from 'primeng/datascroller';
+import { AccordionModule } from 'primeng/accordion';
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,6 +35,7 @@ import { OrderAdminComponent } from './order-admin/order-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { GestionProduitComponent } from './gestion-produit/gestion-produit.component';
+import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes.component';
 import { UserService } from './user.service';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
@@ -52,7 +54,7 @@ const appRoutes: Routes = [
     { path: 'Inscription', component: InscriptionComponent },
     { path: 'AddProduct', component: CreateProductComponent },
     { path: 'GestionProduit', component: GestionProduitComponent },
-    { path: 'GestionCommandes', component: CreateProductComponent },
+    { path: 'GestionCommandes', component: GestionCommandesComponent },
     { path: 'Cart', component: CartComponent }
 ];
 
@@ -67,6 +69,7 @@ const appRoutes: Routes = [
         ProductsComponent,
         CreateProductComponent,
         GestionProduitComponent,
+        GestionCommandesComponent,
         CartComponent
     ],
     imports: [
@@ -90,7 +93,8 @@ const appRoutes: Routes = [
         MessageModule,
         FileUploadModule,
         GrowlModule,
-        DataScrollerModule
+        DataScrollerModule,
+        AccordionModule
     ],
     providers: [
         AppService,

@@ -1,10 +1,18 @@
-# DurandalFront
+# Durandal-Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+![Durandal](src/assets/logo.png)
+You can find the back-end of this project here -> [Durandal-Back](https://github.com/DocThomus/Durandal-Back)
 
-## Installing Node Modules
+## Setup
 
 After cloning the project, run `npm install` to generate the needed modules.
+
+## Developers
+
+Charles Allard ([charlesallard](https://github.com/charlesallard))
+Thomas Bonnin ([DocThomus](https://github.com/DocThomus))
+Florian Geffry ([boulton](https://github.com/boulton))
+Gabin Rey-Gorrez ([Fulgryn](https://github.com/Fulgryn))
 
 ## Development server
 
