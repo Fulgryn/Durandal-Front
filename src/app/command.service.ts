@@ -21,6 +21,10 @@ export class CommandService {
         return this.http.get(Config.restApi.concat('/commands'));
     }
 
+    getCommandsFrom(userEmail : string) {
+        return this.http.get(Config.restApi.concat('/commandsFrom?userEmail=' + userEmail));
+    }
+
     addCommand(userEmail: string, products: Map<number, number>) {
         let command = {
             userEmail: userEmail, 

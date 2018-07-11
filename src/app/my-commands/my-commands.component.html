@@ -1,0 +1,32 @@
+<h1>Mes commandes</h1>
+<hr>
+
+<p-accordion [multiple]="true">
+    <p-accordionTab *ngFor="let command of commands">
+        <p-header>
+            id : {{command.id}} - client : {{command.client.email}}
+        </p-header>
+        <p>Client : {{command.client.email}} - ID : {{command.client.id}} -  Adresse : {{command.client.adresse}} - Téléphone : {{command.client.telephone}}</p>
+        <hr>
+        <p-table [value]="command.contenuCommande">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Editor</th>
+                    <th>Quantity</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contenu>
+                <tr>
+                    <td>{{contenu.product.id}}</td>
+                    <td>{{contenu.product.name}}</td>
+                    <td>{{contenu.product.type}}</td>
+                    <td>{{contenu.product.editor}}</td>
+                    <td>{{contenu.quantity}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-accordionTab>
+</p-accordion>
